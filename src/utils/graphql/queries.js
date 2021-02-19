@@ -5,8 +5,19 @@ export const RESTAURANTS_QUERY = gql`
     restaurants {
       restaurants {
         id
+        happyHourDays
+        startTime
+        endTime
+        percentOffDrinks
+        percentOffFood
+        coordinates {
+          lat
+          lng
+        }
+        address
         url
         name
+        image
         createdAt
         description
         createdBy {
@@ -16,6 +27,7 @@ export const RESTAURANTS_QUERY = gql`
         votes {
           id
           user {
+            name
             id
           }
         }
