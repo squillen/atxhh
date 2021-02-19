@@ -14,6 +14,9 @@ export const RESTAURANTS_QUERY = gql`
           lat
           lng
         }
+        goFor
+        when
+        menu
         address
         url
         name

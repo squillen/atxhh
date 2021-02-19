@@ -27,7 +27,6 @@ export default function Header() {
                 onClick={() => {
                   removeIDFromLocalStorage();
                   removeAuthFromLocalStorage();
-                  
                   history.push('/');
                 }}
               >

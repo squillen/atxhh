@@ -1,22 +1,22 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import {
   ApolloProvider,
   ApolloClient,
   createHttpLink,
   InMemoryCache,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import reportWebVitals from "./reportWebVitals";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-import App from "./components/App";
-import "./styles/index.css";
-import { getAuth } from "./utils/helpers";
+import App from './components/App';
+import './styles/index.css';
+import { getAuth } from './utils/helpers';
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000",
+  uri: 'http://localhost:4000',
   // uri: "https://atxhh-graphql.herokuapp.com/",
 });
 
@@ -25,7 +25,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
@@ -42,7 +42,7 @@ ReactDOM.render(
       <App />
     </ApolloProvider>
   </BrowserRouter>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 reportWebVitals(console.log);
