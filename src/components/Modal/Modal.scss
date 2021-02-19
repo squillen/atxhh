@@ -1,0 +1,30 @@
+.modal {
+  color: #000;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  font-size: 1.5rem;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  &__children {
+    position: relative;
+    width: 40rem;
+    height: 70%;
+    overflow-y: scroll;
+    background: white;
+    padding: 3rem;
+
+    & .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+    }
+  }
+}

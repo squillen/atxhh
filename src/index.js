@@ -9,18 +9,19 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import reportWebVitals from "./reportWebVitals";
-import { AUTH_TOKEN } from "./constants";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 import App from "./components/App";
 import "./styles/index.css";
+import { getAuth } from "./utils/helpers";
 
 const httpLink = createHttpLink({
-  uri: "https://atxhh-graphql.herokuapp.com/",
+  uri: "http://localhost:4000",
+  // uri: "https://atxhh-graphql.herokuapp.com/",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem(AUTH_TOKEN);
+  const token = getAuth();
   return {
     headers: {
       ...headers,
@@ -30,7 +31,8 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: httpLink,
+  // link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
@@ -43,9 +45,6 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals(console.log);
 
 // If you want your app to work offline and load faster, you can change

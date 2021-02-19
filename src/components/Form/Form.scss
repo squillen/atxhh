@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+  text-transform: capitalize;
+
+  & input {
+    height: 3rem;
+    width: 80%;
+  }
+
+  & label {
+    font-size: 2rem;
+  }
+}

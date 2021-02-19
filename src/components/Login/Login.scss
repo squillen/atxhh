@@ -1,0 +1,12 @@
+.login-header {
+  &--main {
+    font-size: 3.3rem;
+  }
+  &--sub {
+    cursor: pointer;
+  }
+  .error {
+    color: red;
+    width: 80%;
+  }
+}

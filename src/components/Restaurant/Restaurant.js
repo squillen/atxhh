@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export default function Restaurant({ restaurant }) {
-  return <div className="container">{restaurant.name}</div>;
+  return <div className="restaurant-container">{restaurant.name}</div>;
 }
 
 Restaurant.propTypes = {

@@ -1,6 +1,5 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
-// eslint-disable-next-line import/prefer-default-export
 export const RESTAURANTS_QUERY = gql`
   {
     restaurants {
@@ -20,6 +19,17 @@ export const RESTAURANTS_QUERY = gql`
             id
           }
         }
+      }
+    }
+  }
+`;
+
+export const PROFILE_QUERY = gql`
+  {
+    currentUser {
+      currentUser {
+        name
+        email
       }
     }
   }

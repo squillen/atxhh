@@ -1,0 +1,11 @@
+.error-container {
+  width: 50%;
+  height: 50%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background: #fff;
+}
