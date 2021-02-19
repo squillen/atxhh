@@ -24,6 +24,7 @@ export default function Login({ showLogin, handleClose }) {
     login: true,
     email: '',
     password: '',
+    role: 'USER',
     name: '',
   });
 
