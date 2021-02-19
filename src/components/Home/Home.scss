@@ -1,0 +1,38 @@
+.home-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-side {
+  width: 100%;
+  padding: 2rem;
+}
+
+.checkbox__selections {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  &--header {
+    font-size: 2rem;
+    margin-right: 2rem;
+  }
+  &--selection {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    min-width: 20%;
+    .checkbox--label {
+      margin-right: 1rem;
+    }
+    input[type='checkbox'] {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .checkbox-input {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}

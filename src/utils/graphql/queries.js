@@ -9,6 +9,8 @@ export const RESTAURANTS_QUERY = gql`
         startTime
         endTime
         percentOffDrinks
+        cuisine
+        price
         percentOffFood
         coordinates {
           lat
