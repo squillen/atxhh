@@ -1,82 +1,125 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Form from '../Form/Form';
+import Dropdown from '../Dropdown/Dropdown';
+import Checkbox from '../Checkbox/Checkbox';
+
+import './UserSelections.scss';
 
 export default function UserSelections({ data }) {
   const [userSelections, setUserSelections] = useState({
-    food: true,
+    eat: true,
     drink: true,
-    cuisine: 'American',
-    price: 1,
-    nights: [new Date().getDay()],
+    cuisines: {},
+    prices: {
+      $: true,
+      $$: false,
+      $$$: false,
+      $$$$: false,
+    },
+    selectedDays: {
+      Sunday: false,
+      Monday: false,
+      Tuesday: false,
+      Wednesday: false,
+      Thursday: false,
+      Friday: false,
+      Saturday: false,
+    },
   });
+
   const [cuisines, setCuisines] = useState([]);
+
   useEffect(() => {
     if (!cuisines.length) {
-      console.log('data :>> ', data);
-      const newCuisines = Object.keys(
-        data.reduce((obj, el) => {
-          const objCopy = { ...obj };
-          objCopy[el.cuisine] = el.cuisine;
-          return objCopy;
-        }, {})
-      );
+      const newCuisines = data.reduce((obj, el) => {
+        const objCopy = { ...obj };
+        objCopy[el.cuisine] = false;
+        return objCopy;
+      }, {});
       setCuisines(newCuisines);
+      setUserSelections({
+        ...userSelections,
+        cuisines: { ...userSelections.cuisines, ...cuisines },
+      });
     }
   }, [data]);
   return (
     <Form>
       <div className="checkbox__selections">
         <h3 className="checkbox__selections--header">I want to:</h3>
-        <div className="checkbox__selections--selection">
-          <label className="checkbox--label" htmlFor="eat">
-            eat
-          </label>
-          <input
-            checked={userSelections.food}
+        {['eat', 'drink'].map((choice) => (
+          <Checkbox
+            key={choice}
             onClick={() =>
               setUserSelections({
                 ...userSelections,
-                food: !userSelections.food,
+                [choice]: !userSelections[choice],
               })
             }
-            className="checkbox--input"
-            type="checkbox"
-            name="eat"
-            value="eat"
+            checkedTest={(el) => userSelections[el]}
+            display={choice}
           />
-        </div>
-        <div className="checkbox__selections--selection">
-          <label className="checkbox--label" htmlFor="drink">
-            drink
-          </label>
-          <input
-            onClick={() =>
-              setUserSelections({
-                ...userSelections,
-                drink: !userSelections.drink,
-              })
-            }
-            checked={userSelections.drink}
-            className="checkbox--input"
-            type="checkbox"
-            name="drink"
-            value="eat"
-          />
-        </div>
+        ))}
       </div>
       <div className="dropdowns">
-        <select name="cuisines" id="cuisines">
-          {cuisines.map((c) => (
-            <option>{c}</option>
+        <Dropdown headerTitle="Cuisines">
+          {Object.keys(cuisines).map((cuisine) => (
+            <Checkbox
+              labelRight
+              key={cuisine}
+              onClick={() =>
+                setUserSelections({
+                  ...userSelections,
+                  cuisines: {
+                    ...userSelections.cuisines,
+                    [cuisine]: !userSelections.cuisines[cuisine],
+                  },
+                })
+              }
+              display={cuisine}
+              checkedTest={(el) => userSelections.cuisines[el]}
+            />
           ))}
-        </select>
-        <select name="price" id="price">
-          <option value="1">$</option>
-          <option value="2">$$</option>
-          <option value="3">$$$</option>
-          <option value="4">$$$$</option>
-        </select>
+        </Dropdown>
+        <Dropdown headerTitle="Price">
+          {Object.keys(userSelections.prices).map((price) => (
+            <Checkbox
+              labelRight
+              key={price}
+              onClick={() =>
+                setUserSelections({
+                  ...userSelections,
+                  prices: {
+                    ...userSelections.prices,
+                    [price]: !userSelections.prices[price],
+                  },
+                })
+              }
+              display={price}
+              checkedTest={(el) => userSelections.prices[el]}
+            />
+          ))}
+        </Dropdown>
+        <Dropdown headerTitle="Days">
+          {Object.keys(userSelections.selectedDays).map((day) => (
+            <Checkbox
+              labelRight
+              key={day}
+              onClick={() =>
+                setUserSelections({
+                  ...userSelections,
+                  selectedDays: {
+                    ...userSelections.selectedDays,
+                    [day]: !userSelections.selectedDays[day],
+                  },
+                })
+              }
+              display={day}
+              checkedTest={(el) => userSelections.selectedDays[el]}
+            />
+          ))}
+        </Dropdown>
       </div>
     </Form>
   );
