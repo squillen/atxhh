@@ -18,9 +18,10 @@ export default function Form({ children, buttonLabel, onClick }) {
 Form.propTypes = {
   children: PropTypes.node.isRequired,
   buttonLabel: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 Form.defaultProps = {
-  buttonLabel: ''
-}
+  buttonLabel: '',
+  onClick: () => {},
+};

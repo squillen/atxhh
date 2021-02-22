@@ -4,8 +4,8 @@ import './Checkbox.scss';
 export default function Checkbox({
   labelRight,
   display,
-  onClick,
-  checkedTest,
+  onChange,
+  checked,
 }) {
   return (
     <div key={display} className="checkbox__selections--selection">
@@ -15,8 +15,8 @@ export default function Checkbox({
         </label>
       )}
       <input
-        onClick={onClick}
-        checked={checkedTest(display)}
+        onChange={onChange}
+        checked={checked}
         className="checkbox--input"
         type="checkbox"
         name={display}
@@ -33,8 +33,8 @@ export default function Checkbox({
 
 Checkbox.propTypes = {
   display: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  checkedTest: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  checked: PropTypes.bool.isRequired,
   labelRight: PropTypes.bool,
 };
 

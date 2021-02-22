@@ -34,7 +34,7 @@ const scaleControlStyle = {
 };
 
 export default function Map({ data }) {
-  const firstCoords = data[0].coordinates;
+  const firstCoords = (data[0] && data[0].coordinates) || {};
   const [viewport, setViewport] = useState({
     latitude: +firstCoords.lat || 30.2717852,
     longitude: +firstCoords.lng || -97.7681922,

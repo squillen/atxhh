@@ -5,7 +5,10 @@ export const CREATE_RESTAURANT_MUTATION = gql`
     $name: String!
     $url: String!
     $description: String!
-    $happyHourDays: String!
+    $happyHourDays: [String!]!
+    $goFor: [String!]!
+    $price: String!
+    $when: String!
     $startTime: String!
     $endTime: String!
     $percentOffDrinks: Int

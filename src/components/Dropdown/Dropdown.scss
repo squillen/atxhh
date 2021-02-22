@@ -16,7 +16,9 @@
   color: black;
   padding: 1rem;
   width: 20rem;
+  max-height: 40rem;
   background-color: white;
   position: absolute;
   z-index: 2;
+  overflow-y: scroll;
 }

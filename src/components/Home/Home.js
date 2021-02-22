@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { RESTAURANTS_QUERY } from '../../utils/graphql/queries';
 
@@ -11,23 +12,34 @@ import './Home.scss';
 import UserSelections from '../UserSelections/UserSelections';
 
 export default function Home() {
-  const { data, error, loading } = useQuery(RESTAURANTS_QUERY);
+  const [selections, setSelections] = useState({});
+  const { data = {}, error, loading, refetch } = useQuery(RESTAURANTS_QUERY, {
+    variables: { ...selections },
+  });
+  useEffect(() => {
+    console.log('refetching')
+    refetch();
+  }, [selections]);
+  const { restaurants = {} } = data;
+  const restaurantData = restaurants.results || [];
   if (loading) return <Loading>loading...</Loading>;
   if (error) return <Error error={error} label="error!" />;
-  const restaurants = data.restaurants.restaurants || [];
   return (
-    restaurants && (
+    restaurantData && (
       <div className="home-container">
         <div className="left-side">
           <div className="selections">
-            <UserSelections data={restaurants} />
+            <UserSelections
+              data={restaurantData}
+              handleUpdate={setSelections}
+            />
           </div>
           <div className="map">
-            <Map data={restaurants} />
+            <Map data={restaurantData} />
           </div>
         </div>
         <div className="right-side">
-          {restaurants.map((restaurant) => (
+          {restaurantData.map((restaurant) => (
             <Restaurant key={restaurant.id} restaurant={restaurant} />
           ))}
         </div>

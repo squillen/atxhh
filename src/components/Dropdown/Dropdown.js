@@ -1,15 +1,21 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Dropdown.scss';
 
-export default function Dropdown({ children, headerTitle }) {
-  const [toggleList, setToggleList] = useState(false);
+export default function Dropdown({ children, headerTitle, active, setActive }) {
+  const [toggleList, setToggleList] = useState(active === headerTitle);
+  useEffect(() => {
+    if (active !== headerTitle) setToggleList(false);
+  }, [active]);
   return (
     <div className="dd-wrapper">
       <button
         type="button"
         className="dd-btn"
-        onClick={() => setToggleList(!toggleList)}
+        onClick={() => {
+          setToggleList(!toggleList);
+          setActive(headerTitle);
+        }}
       >
         <div className="dd-header--title">{headerTitle}</div>
         {toggleList ? (
@@ -30,4 +36,6 @@ export default function Dropdown({ children, headerTitle }) {
 Dropdown.propTypes = {
   children: PropTypes.node.isRequired,
   headerTitle: PropTypes.string.isRequired,
+  active: PropTypes.string.isRequired,
+  setActive: PropTypes.func.isRequired,
 };

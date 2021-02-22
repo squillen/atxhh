@@ -1,9 +1,20 @@
 import { gql } from '@apollo/client';
 
 export const RESTAURANTS_QUERY = gql`
-  {
-    restaurants {
-      restaurants {
+  query GetFilteredRestaurants(
+    $whatToGoFor: [String!]
+    $cuisines: [Cuisine!]
+    $prices: [String!]
+    $happyHourDays: [String!]
+  ) {
+    restaurants(
+      whatToGoFor: $whatToGoFor
+      cuisines: $cuisines
+      prices: $prices
+      happyHourDays: $happyHourDays
+    ) {
+      count
+      results {
         id
         happyHourDays
         startTime
@@ -16,7 +27,7 @@ export const RESTAURANTS_QUERY = gql`
           lat
           lng
         }
-        goFor
+        whatToGoFor
         when
         menu
         address
