@@ -104,7 +104,6 @@ export default function UserSelections({ originalData, handleUpdate }) {
     <Form>
       <div className="checkbox__selections">
         <h3 className="checkbox__selections--header">I want:</h3>
-
         {userSelections.whatToGoFor.map(([display, currentBool], idx) => (
           <Checkbox
             labelRight
@@ -118,48 +117,64 @@ export default function UserSelections({ originalData, handleUpdate }) {
         ))}
       </div>
       <div className="dropdowns">
-        <Dropdown
-          headerTitle="Cuisines"
-          active={activeDropdown}
-          setActive={setActiveDropdown}
-        >
-          {userSelections.cuisines.map(([cuisine, currentBool], idx) => (
-            <Checkbox
-              labelRight
-              key={cuisine}
-              onChange={() =>
-                updateUserSelectionTupleValue('cuisines', idx, !currentBool)
-              }
-              display={cuisine.split('_').join(' ')}
-              checked={userSelections.cuisines[idx][1]}
-            />
-          ))}
-        </Dropdown>
-        <div className="checkboxes">
-          {userSelections.prices.map(([display, currentBool], idx) => (
-            <Checkbox
-              labelRight
-              key={display}
-              onChange={() =>
-                updateUserSelectionTupleValue('prices', idx, !currentBool)
-              }
-              display={display}
-              checked={userSelections.prices[idx][1]}
-            />
-          ))}
+        <div className="selection">
+          <h4 className="selection--header">Cost:</h4>
+          <div className="selection--checkboxes">
+            {userSelections.prices.map(([display, currentBool], idx) => (
+              <div key={display} className="selection--checkbox">
+                <Checkbox
+                  labelRight
+                  key={display}
+                  onChange={() =>
+                    updateUserSelectionTupleValue('prices', idx, !currentBool)
+                  }
+                  display={display}
+                  checked={userSelections.prices[idx][1]}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="checkboxes">
-          {userSelections.selectedDays.map(([day, currentBool], idx) => (
-            <Checkbox
-              labelRight
-              key={day}
-              onChange={() =>
-                updateUserSelectionTupleValue('selectedDays', idx, !currentBool)
-              }
-              display={day}
-              checked={currentBool}
-            />
-          ))}
+        <div className="selection">
+          <h4 className="selection--header">On:</h4>
+          <div className="selection--checkboxes">
+            {userSelections.selectedDays.map(([day, currentBool], idx) => (
+              <div key={day} className="selection--checkbox">
+                <Checkbox
+                  labelRight
+                  key={day}
+                  onChange={() =>
+                    updateUserSelectionTupleValue(
+                      'selectedDays',
+                      idx,
+                      !currentBool
+                    )
+                  }
+                  display={day}
+                  checked={currentBool}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="selection full-width">
+          <Dropdown
+            headerTitle="Cuisines"
+            active={activeDropdown}
+            setActive={setActiveDropdown}
+          >
+            {userSelections.cuisines.map(([cuisine, currentBool], idx) => (
+              <Checkbox
+                labelRight
+                key={cuisine}
+                onChange={() =>
+                  updateUserSelectionTupleValue('cuisines', idx, !currentBool)
+                }
+                display={cuisine.split('_').join(' ')}
+                checked={userSelections.cuisines[idx][1]}
+              />
+            ))}
+          </Dropdown>
         </div>
       </div>
     </Form>
