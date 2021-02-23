@@ -49,7 +49,7 @@ export default function Map({ data }) {
       height="80vh"
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onViewportChange={setViewport}
-      zoom={14}
+      zoom={11}
       mapboxApiAccessToken={
         process.env.MAPBOX_TOKEN ||
         'pk.eyJ1Ijoic3F1aWxsZW44OCIsImEiOiJja2xjc25xbWUwdHh6MnBvMzE3czJ4eTI4In0.TNmrTPWKzbsvaJeXjLTSww'
