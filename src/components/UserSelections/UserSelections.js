@@ -128,7 +128,7 @@ export default function UserSelections({ originalData, handleUpdate }) {
               labelRight
               key={cuisine}
               onChange={() =>
-                updateUserSelectionTupleValue('selectedDays', idx, !currentBool)
+                updateUserSelectionTupleValue('cuisines', idx, !currentBool)
               }
               display={cuisine.split('_').join(' ')}
               checked={userSelections.cuisines[idx][1]}
