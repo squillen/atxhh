@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MapGL, {
+  Popup,
   NavigationControl,
   FullscreenControl,
   ScaleControl,
   GeolocateControl,
 } from 'react-map-gl';
 import Pins from '../Pins/Pins';
+import RestaurantInfo from '../RestaurantInfo/RestaurantInfo';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const geolocateStyle = {
@@ -33,7 +35,8 @@ const scaleControlStyle = {
   padding: '10px',
 };
 
-export default function Map({ data }) {
+function Map({ data, onClick, selectedRestaurant }) {
+  const [showPopup, setShowPopup] = useState(false);
   const firstCoords = (data[0] && data[0].coordinates) || {};
   const [viewport, setViewport] = useState({
     latitude: +firstCoords.lat || 30.2717852,
@@ -42,6 +45,16 @@ export default function Map({ data }) {
     bearing: 0,
     pitch: 0,
   });
+  
+  const handleClick = (arg) => {
+    onClick(arg);
+    setShowPopup(!showPopup);
+  };
+
+  useEffect(() => {
+    if (selectedRestaurant) setShowPopup(true);
+  }, [selectedRestaurant]);
+
   return (
     <MapGL
       {...viewport}
@@ -49,13 +62,25 @@ export default function Map({ data }) {
       height="80vh"
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onViewportChange={setViewport}
-      zoom={11}
+      zoom={13}
       mapboxApiAccessToken={
         process.env.MAPBOX_TOKEN ||
         'pk.eyJ1Ijoic3F1aWxsZW44OCIsImEiOiJja2xjc25xbWUwdHh6MnBvMzE3czJ4eTI4In0.TNmrTPWKzbsvaJeXjLTSww'
       }
     >
-      <Pins data={data} onClick={() => {}} />
+      <Pins data={data} onClick={handleClick} />
+      {selectedRestaurant && showPopup && (
+        <Popup
+          tipSize={5}
+          anchor="top-left"
+          longitude={+selectedRestaurant.coordinates.lng}
+          latitude={+selectedRestaurant.coordinates.lat}
+          closeOnClick={false}
+          onClose={() => setShowPopup(false)}
+        >
+          <RestaurantInfo selectedRestaurant={selectedRestaurant} />
+        </Popup>
+      )}
       <GeolocateControl style={geolocateStyle} />
       <FullscreenControl style={fullscreenControlStyle} />
       <NavigationControl style={navStyle} />
@@ -66,4 +91,8 @@ export default function Map({ data }) {
 
 Map.propTypes = {
   data: PropTypes.array.isRequired,
+  selectedRestaurant: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
+
+export default React.memo(Map);

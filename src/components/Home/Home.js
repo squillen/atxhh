@@ -24,6 +24,16 @@ export default function Home() {
     updatedResults && updatedResults.length
       ? updatedResults
       : originalRestaurants;
+  useEffect(() => {
+    if (
+      !selectedRestaurant &&
+      data &&
+      data.restaurants &&
+      data.restaurants.results
+    ) {
+      setSelectedRestaurant(data.restaurants.results[0]);
+    }
+  }, [data]);
   return (
     <div className="home-container">
       {loading ? (
@@ -41,12 +51,15 @@ export default function Home() {
               <div className="map">
                 <Map
                   data={restaurantData}
-                  handleClick={setSelectedRestaurant}
+                  onClick={setSelectedRestaurant}
+                  selectedRestaurant={selectedRestaurant}
                 />
               </div>
             </div>
             <div className="right-side">
-              {selectedRestaurant && <div className="hero">hero!</div>}
+              {selectedRestaurant && (
+                <div className="hero">{selectedRestaurant.name}</div>
+              )}
             </div>
           </div>
           <div className="restaurants-container">
