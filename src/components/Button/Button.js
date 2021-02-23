@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import './Button.scss';
 
 export default function Button({ type, label, onClick }) {
-  console.log('type :>> ', type);
   return (
     <button className="button-container" type={type} onClick={onClick}>
       {label}

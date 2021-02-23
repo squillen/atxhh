@@ -12,28 +12,23 @@ import './Home.scss';
 import UserSelections from '../UserSelections/UserSelections';
 
 export default function Home() {
-  const [selections, setSelections] = useState({});
-  const { data = {}, error, loading, refetch } = useQuery(RESTAURANTS_QUERY, {
-    variables: { ...selections },
-  });
-  useEffect(() => {
-    console.log('refetching')
-    refetch();
-  }, [selections]);
-  const { restaurants = {} } = data;
-  const restaurantData = restaurants.results || [];
+  const [updatedResults, setUpdatedResults] = useState([]);
+  const { data = {}, error, loading, refetch } = useQuery(RESTAURANTS_QUERY);
+
   if (loading) return <Loading>loading...</Loading>;
   if (error) return <Error error={error} label="error!" />;
+  const originalRestaurants = data.restaurants.results || [];
+  const restaurantData = updatedResults.length ? updatedResults : originalRestaurants;
   return (
-    restaurantData && (
-      <div className="home-container">
+    <div className="home-container">
+      <div className="selections">
+        <UserSelections
+          originalData={originalRestaurants}
+          handleUpdate={setUpdatedResults}
+        />
+      </div>
+      <div className="restaurant-detail">
         <div className="left-side">
-          <div className="selections">
-            <UserSelections
-              data={restaurantData}
-              handleUpdate={setSelections}
-            />
-          </div>
           <div className="map">
             <Map data={restaurantData} />
           </div>
@@ -44,6 +39,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-    )
+    </div>
   );
 }

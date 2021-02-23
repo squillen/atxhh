@@ -15,7 +15,6 @@ export function useAuthentication(id, change) {
         variables: { id },
       });
       if (client && change) client.resetStore();
-      console.log('currentUser :>> ', currentUser);
       setResult(!!currentUser);
     }
   }, [id, change]);

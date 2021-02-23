@@ -6,7 +6,6 @@ import Modal from '../Modal/Modal';
 import './Error.scss';
 
 export default function Error({ onClick, error, label }) {
-  console.log('error :>> ', error);
   const [showError, setShowError] = useState(true);
   const handleClick = () => {
     onClick();
