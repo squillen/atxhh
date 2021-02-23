@@ -103,7 +103,7 @@ export default function UserSelections({ originalData, handleUpdate }) {
   return (
     <Form>
       <div className="checkbox__selections">
-        <h3 className="checkbox__selections--header">I want to:</h3>
+        <h3 className="checkbox__selections--header">I want:</h3>
 
         {userSelections.whatToGoFor.map(([display, currentBool], idx) => (
           <Checkbox
@@ -135,11 +135,7 @@ export default function UserSelections({ originalData, handleUpdate }) {
             />
           ))}
         </Dropdown>
-        <Dropdown
-          headerTitle="Price"
-          active={activeDropdown}
-          setActive={setActiveDropdown}
-        >
+        <div className="checkboxes">
           {userSelections.prices.map(([display, currentBool], idx) => (
             <Checkbox
               labelRight
@@ -151,12 +147,8 @@ export default function UserSelections({ originalData, handleUpdate }) {
               checked={userSelections.prices[idx][1]}
             />
           ))}
-        </Dropdown>
-        <Dropdown
-          headerTitle="Days"
-          active={activeDropdown}
-          setActive={setActiveDropdown}
-        >
+        </div>
+        <div className="checkboxes">
           {userSelections.selectedDays.map(([day, currentBool], idx) => (
             <Checkbox
               labelRight
@@ -168,7 +160,7 @@ export default function UserSelections({ originalData, handleUpdate }) {
               checked={currentBool}
             />
           ))}
-        </Dropdown>
+        </div>
       </div>
     </Form>
   );
