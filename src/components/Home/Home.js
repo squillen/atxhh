@@ -4,12 +4,15 @@ import { RESTAURANTS_QUERY } from '../../utils/graphql/queries';
 
 // COMPONENTS
 import Restaurant from '../Restaurant/Restaurant';
+import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
+import BackgroundImageDiv from '../BackgroundImageDiv';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
 import Map from '../Map/Map';
 
 import './Home.scss';
 import UserSelections from '../UserSelections/UserSelections';
+import RestaurantHero from '../RestaurantHero/RestaurantHero';
 
 export default function Home() {
   const [updatedResults, setUpdatedResults] = useState([]);
@@ -58,14 +61,30 @@ export default function Home() {
             </div>
             <div className="right-side">
               {selectedRestaurant && (
-                <div className="hero">{selectedRestaurant.name}</div>
+                <div className="hero-container">
+                  <div className="hero-container--image">
+                    <BackgroundImageDiv image={selectedRestaurant.image} />
+                  </div>
+                  <RestaurantDetails restaurant={selectedRestaurant} />
+                </div>
               )}
             </div>
           </div>
           <div className="restaurants-container">
-            {restaurantData.map((restaurant) => (
-              <Restaurant key={restaurant.id} restaurant={restaurant} />
-            ))}
+            <h2 className="restaurants-container--header">Restaurants:</h2>
+            <div className="restaurants-container__restaurants">
+              {restaurantData.map((restaurant) => (
+                <div
+                  key={restaurant.id}
+                  className="restaurants-container__restaurants--restaurant"
+                >
+                  <div className="restaurant--image">
+                    <BackgroundImageDiv image={restaurant.image} />
+                  </div>
+                  <RestaurantDetails restaurant={restaurant} />
+                </div>
+              ))}
+            </div>
           </div>
         </>
       )}

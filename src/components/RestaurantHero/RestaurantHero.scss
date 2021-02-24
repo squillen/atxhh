@@ -1,0 +1,72 @@
+.hero-container {
+  width: 100%;
+  height: 100%;
+
+  &--image {
+    height: 30%;
+    min-height: 20rem;
+  }
+
+  color: black;
+  &__header {
+    width: 100%;
+    height: 30%;
+    position: relative;
+    &--text {
+      position: absolute;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &--main {
+        font-size: 5rem;
+      }
+    }
+  }
+  &__body {
+    padding: 2rem;
+    color: black;
+    width: 100%;
+    height: 70%;
+    background-color: whitesmoke;
+    &--header {
+      &-main {
+        font-size: 3.5rem;
+        transition: all 0.5s ease;
+        &:hover {
+          transform: scale(1.01);
+          text-decoration: underline;
+        }
+        a {
+          color: #0c6bed;
+        }
+      }
+      &-sub {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    &--details {
+      font-size: 1.5rem;
+      padding: 1rem 0;
+      width: 90%;
+      .detail {
+        margin: 1rem 0;
+        &--header {
+          font-weight: 700;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}
+
+.dollar-sign {
+  font-size: 1.4rem;
+  &--green {
+    // color: green;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+}
