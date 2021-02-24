@@ -63,10 +63,7 @@ function Map({ data, onClick, selectedRestaurant }) {
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onViewportChange={setViewport}
       zoom={10}
-      mapboxApiAccessToken={
-        process.env.MAPBOX_TOKEN ||
-        'pk.eyJ1Ijoic3F1aWxsZW44OCIsImEiOiJja2xjc25xbWUwdHh6MnBvMzE3czJ4eTI4In0.TNmrTPWKzbsvaJeXjLTSww'
-      }
+      mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
     >
       <Pins data={data} onClick={handleClick} />
       {selectedRestaurant && showPopup && (
