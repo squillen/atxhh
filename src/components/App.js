@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/App.css';
 import { Switch, Route } from 'react-router';
-import Home from './Home/Home';
-import Header from './Header/Header';
+import Home from './Home';
+import Header from './Header';
 
 function App() {
   return (
