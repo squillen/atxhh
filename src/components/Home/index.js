@@ -75,8 +75,9 @@ export default function Home() {
         {loading ? (
           <Loading>loading...</Loading>
         ) : (
-          <>
-            <div className="restaurant-detail">
+          <div className="restaurant-detail">
+            {/* MAP SECTION */}
+            <div className="map-section">
               <div className="left-side">
                 <div className="map">
                   <Map
@@ -89,31 +90,33 @@ export default function Home() {
               <div className="right-side">
                 {selectedRestaurant && (
                   <div className="hero-container">
-                    <div className="hero-container--image">
-                      <BackgroundImageDiv image={selectedRestaurant.image} />
-                    </div>
+                    <div
+                      className="image-div"
+                      style={{
+                        background: `url(${selectedRestaurant.image}) center no-repeat`,
+                        backgroundSize: 'cover',
+                      }}
+                    />
                     <RestaurantDetails restaurant={selectedRestaurant} />
                   </div>
                 )}
               </div>
             </div>
             <div className="restaurants-container">
-              <h2 className="restaurants-container--header">Restaurants:</h2>
+              <h2 className="restaurants-container__header">Restaurants:</h2>
               <div className="restaurants-container__restaurants">
                 {restaurantData.map((restaurant) => (
                   <div
                     key={restaurant.id}
                     className="restaurants-container__restaurants--restaurant"
                   >
-                    <div className="restaurant--image">
-                      <BackgroundImageDiv image={restaurant.image} />
-                    </div>
+                    <img src={restaurant.image} className="restaurant-image"/>
                     <RestaurantDetails restaurant={restaurant} />
                   </div>
                 ))}
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

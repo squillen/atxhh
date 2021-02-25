@@ -12,7 +12,7 @@
 
     &--white {
       @extend .selections-container;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.95);
       color: black;
     }
   }
@@ -28,10 +28,8 @@
   }
 }
 
-.restaurant-detail {
+.map-section {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
 }
 
 .right-side {
@@ -60,6 +58,10 @@
   }
 }
 
+.restaurant-image {
+  flex: 0 0 33.33%;
+  width: 30rem;
+}
 
 .hero-container {
   color: black;
@@ -67,13 +69,10 @@
   height: 100%;
   overflow: hidden;
   background: whitesmoke;
-
-  &--image {
-    height: 30%;
-    min-height: 20rem;
-  }
 }
 
-.restaurant--image {
-  width: 40%;
+.image-div {
+  flex: 0 0 33.33%;
+  height: 30%;
+  min-height: 20rem;
 }
