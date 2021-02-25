@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './Modal.scss';
+import './styles.scss';
 
 export default function Modal({ display, children, handleClose }) {
   return (

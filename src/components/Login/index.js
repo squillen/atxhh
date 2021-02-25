@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/client';
-import Modal from '../Modal/Modal';
-import Form from '../Form/Form';
-import './Login.scss';
+import Modal from '../Modal';
+import Form from '../Form';
+import './styles.scss';
 
 import { LOGIN_MUTATION, SIGNUP_MUTATION } from '../../utils/graphql/mutations';
 import { setAuth, setUserIDInLocalStorage } from '../../utils/helpers';

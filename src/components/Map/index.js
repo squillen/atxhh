@@ -7,8 +7,8 @@ import MapGL, {
   ScaleControl,
   GeolocateControl,
 } from 'react-map-gl';
-import Pins from '../Pins/Pins';
-import PopupInfo from '../PopupInfo/PopupInfo';
+import Pins from '../Pins';
+import PopupInfo from '../PopupInfo';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const geolocateStyle = {
@@ -63,7 +63,7 @@ function Map({ data, onClick, selectedRestaurant }) {
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onViewportChange={setViewport}
       zoom={10}
-      mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
       <Pins data={data} onClick={handleClick} />
       {selectedRestaurant && showPopup && (

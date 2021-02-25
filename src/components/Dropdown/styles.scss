@@ -7,16 +7,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 2rem;
+  // font-size: 2rem;
   width: 100%;
   height: 3rem;
 }
 
 .dd-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   color: black;
-  padding: 1rem;
   width: 100%;
-  min-height: 10rem;
+  min-height: 7rem;
   max-height: 40rem;
   background-color: white;
   position: absolute;

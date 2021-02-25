@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
-import './Checkbox.scss';
+import './styles.scss';
 
-export default function Checkbox({
-  labelRight,
-  display,
-  onChange,
-  checked,
-}) {
+export default function Checkbox({ labelRight, display, onChange, checked }) {
   return (
-    <div key={display} className="checkbox__selections--selection">
+    <div
+      onClick={onChange}
+      key={display}
+      className="checkbox__selections--selection"
+    >
       {!labelRight && (
         <label className="checkbox--label" htmlFor={display}>
           {display}

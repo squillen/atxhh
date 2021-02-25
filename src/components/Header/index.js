@@ -5,9 +5,9 @@ import {
   removeIDFromLocalStorage,
   removeAuthFromLocalStorage,
 } from '../../utils/helpers';
-import Login from '../Login/Login';
+import Login from '../Login';
 
-import './Header.scss';
+import './styles.scss';
 
 export default function Header() {
   const id = getUserIDFromLocalStorage();

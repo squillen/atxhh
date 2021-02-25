@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './styles.scss';
 
 export default function Restaurant({ restaurant }) {
   const {

@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { RESTAURANTS_QUERY } from '../../utils/graphql/queries';
-import Form from '../Form/Form';
-import Dropdown from '../Dropdown/Dropdown';
-import Checkbox from '../Checkbox/Checkbox';
+import Form from '../Form';
+import Dropdown from '../Dropdown';
+import Checkbox from '../Checkbox';
 
-import './UserSelections.scss';
+import './styles.scss';
 
 const todaysDay = new Date().getDay();
 const initialState = {

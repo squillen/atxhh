@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './PopupInfo.scss'
+import './styles.scss';
 
 function PopupInfo({ selectedRestaurant }) {
   return (

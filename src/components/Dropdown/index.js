@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import './Dropdown.scss';
+import './styles.scss';
 
 export default function Dropdown({ children, headerTitle, active, setActive }) {
   const [toggleList, setToggleList] = useState(active === headerTitle);

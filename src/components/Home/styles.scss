@@ -1,0 +1,79 @@
+.home-container {
+}
+
+.selections {
+  &-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 1rem;
+    transition: all 0.5s;
+
+    &--white {
+      @extend .selections-container;
+      background: rgba(255,255,255,0.95);
+      color: black;
+    }
+  }
+
+  &--hide {
+    visibility: hidden;
+    height: 0;
+  }
+
+  &--show {
+    visibility: visible;
+    height: auto;
+  }
+}
+
+.restaurant-detail {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.right-side {
+  width: inherit;
+  height: inherit;
+  // padding: 2rem;
+}
+
+.restaurants-container {
+  width: 100%;
+  height: 100%;
+  color: black;
+  margin: 3rem 0;
+
+  &--header {
+    font-size: 2rem;
+  }
+
+  &__restaurants {
+    width: 100%;
+    height: 100%;
+    &--restaurant {
+      display: flex;
+      margin: 1.5rem 0;
+    }
+  }
+}
+
+
+.hero-container {
+  color: black;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: whitesmoke;
+
+  &--image {
+    height: 30%;
+    min-height: 20rem;
+  }
+}
+
+.restaurant--image {
+  width: 40%;
+}

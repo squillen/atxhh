@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
-import './Form.scss';
+import Button from '../Button';
+import './styles.scss';
 
 export default function Form({ children, buttonLabel, onClick }) {
   return (

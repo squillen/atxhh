@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './RestaurantHero.scss';
-import RestaurantDetails from '../RestaurantDetails/RestaurantDetails'
+import './styles.scss';
+import RestaurantDetails from '../RestaurantDetails'
 import BackgroundImageDiv from '../BackgroundImageDiv';
 
 function RestaurantHero({ restaurant }) {
