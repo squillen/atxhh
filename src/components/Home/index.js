@@ -97,7 +97,9 @@ export default function Home() {
               </div>
             </div>
             <div className="restaurants-container">
-              <h2 className="restaurants-container__header">Restaurants:</h2>
+              <h2 className="restaurants-container__header">
+                {`${restaurantData.length} Restaurants:`}
+              </h2>
               <div className="restaurants-container__restaurants">
                 {restaurantData.map((restaurant) => (
                   <div

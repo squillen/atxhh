@@ -29,6 +29,11 @@ export const RESTAURANTS_QUERY = gql`
         }
         whatToGoFor
         when
+        rating
+        warnings {
+          message
+        }
+        active
         menu
         address
         url

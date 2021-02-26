@@ -10,6 +10,8 @@
   color: black;
   background-color: whitesmoke;
   &__header {
+    display: flex;
+    justify-content: space-between;
     &-main {
       width: fit-content;
       font-size: 3.5rem;
@@ -19,7 +21,7 @@
         text-decoration: underline;
       }
       a {
-        color: #0c6bed;
+        color: var(--color-link-blue);
       }
     }
     &-sub {
@@ -31,6 +33,11 @@
     font-size: 1.5rem;
     // padding: 1rem 0;
     width: 90%;
+    .menu {
+      a {
+        color: var(--color-link-blue);
+      }
+    }
     .detail {
       margin: 1rem 0;
       &__header {
@@ -64,4 +71,3 @@
     font-size: 1.5rem;
   }
 }
-
