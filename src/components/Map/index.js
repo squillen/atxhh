@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import MapGL, {
+import ReactMapGL, {
   Popup,
   NavigationControl,
   FullscreenControl,
@@ -41,7 +41,7 @@ function Map({ data, onClick, selectedRestaurant }) {
   const [viewport, setViewport] = useState({
     latitude: +firstCoords.lat || 30.2717852,
     longitude: +firstCoords.lng || -97.7681922,
-    zoom: 14,
+    zoom: 12,
     bearing: 0,
     pitch: 0,
   });
@@ -56,13 +56,12 @@ function Map({ data, onClick, selectedRestaurant }) {
   }, [selectedRestaurant]);
 
   return (
-    <MapGL
+    <ReactMapGL
       {...viewport}
       width="50vw"
       height="80vh"
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onViewportChange={setViewport}
-      zoom={10}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
       <Pins data={data} onClick={handleClick} />
@@ -82,7 +81,7 @@ function Map({ data, onClick, selectedRestaurant }) {
       <FullscreenControl style={fullscreenControlStyle} />
       <NavigationControl style={navStyle} />
       <ScaleControl style={scaleControlStyle} />
-    </MapGL>
+    </ReactMapGL>
   );
 }
 
