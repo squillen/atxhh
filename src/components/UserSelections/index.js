@@ -15,11 +15,11 @@ const initialState = {
     ['drinks', true],
   ],
   prices: [
-    ['All', false],
+    ['All', true],
     ['$', true],
-    ['$$', false],
-    ['$$$', false],
-    ['$$$$', false],
+    ['$$', true],
+    ['$$$', true],
+    ['$$$$', true],
   ],
   selectedDays: [
     ['All', false],
@@ -68,8 +68,10 @@ export default function UserSelections({ originalData, handleUpdate }) {
         });
         return arrCopy;
       }, []);
-      console.log('newCuisines :>> ', newCuisines);
-      setUserSelections({ ...userSelections, cuisines: [...userSelections.cuisines, ...newCuisines] });
+      setUserSelections({
+        ...userSelections,
+        cuisines: [...userSelections.cuisines, ...newCuisines],
+      });
     }
   }, [originalData]);
 
@@ -77,7 +79,7 @@ export default function UserSelections({ originalData, handleUpdate }) {
     const searchIfSelected = (array, cb) => {
       let formattedArray = [...array];
       if (array[0][0].toString().toLowerCase() === 'all')
-        formattedArray = array.slice(1, array.length - 1);
+        formattedArray = array.slice(1, array.length);
       return formattedArray.reduce((arr, tuple, idx) => {
         const [el, isSelected] = tuple;
         if (isSelected) arr.push(cb(el, idx));
@@ -113,8 +115,12 @@ export default function UserSelections({ originalData, handleUpdate }) {
         el[1] = value;
       });
     } else {
+      if (newArr[0][0].toString().toLowerCase() === 'all') {
+        newArr[0][1] = !userSelections.whatToGoFor[0][1];
+      }
       newArr[idx][1] = value;
     }
+    console.log('newArr :>> ', newArr);
     setUserSelections({
       ...userSelections,
       [key]: newArr,
