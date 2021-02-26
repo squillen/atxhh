@@ -16,7 +16,7 @@ import './styles/index.css';
 import { getAuth } from './utils/helpers';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
+  uri: 'http://127.0.0.1:4000/',
   // uri: "https://atxhh-graphql.herokuapp.com/",
 });
 

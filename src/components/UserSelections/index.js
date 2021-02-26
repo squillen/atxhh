@@ -15,12 +15,14 @@ const initialState = {
     ['drinks', true],
   ],
   prices: [
+    ['All', false],
     ['$', true],
     ['$$', false],
     ['$$$', false],
     ['$$$$', false],
   ],
   selectedDays: [
+    ['All', false],
     ['Sunday', todaysDay === 0],
     ['Monday', todaysDay === 1],
     ['Tuesday', todaysDay === 2],
@@ -29,18 +31,19 @@ const initialState = {
     ['Friday', todaysDay === 5],
     ['Saturday', todaysDay === 6],
   ],
-  cuisines: [],
+  cuisines: [['All', true]],
 };
 
 export default function UserSelections({ originalData, handleUpdate }) {
   const [activeDropdown, setActiveDropdown] = useState('');
-  const [search, updateSearch] = useState({});
+  const [search, setSearch] = useState({});
   const [userSelections, setUserSelections] = useState(initialState);
   const { data = {}, error, loading, refetch } = useQuery(RESTAURANTS_QUERY, {
     variables: search,
   });
 
   useEffect(() => {
+    console.log('data :>> ', data);
     if (data && data.restaurants) {
       handleUpdate(data.restaurants.results);
     }
@@ -49,28 +52,38 @@ export default function UserSelections({ originalData, handleUpdate }) {
   useEffect(() => {
     refetch();
   }, [search]);
+
   // set all restaurant cuisines
   useEffect(() => {
-    if (originalData.length && !userSelections.cuisines.length) {
+    if (originalData.length && userSelections.cuisines.length <= 1) {
+      const cuisinesIncluded = {};
       const newCuisines = originalData.reduce((arr, el) => {
         const arrCopy = [...arr];
         el.cuisine.forEach((cuisine) => {
-          const tuple = [cuisine, true];
-          arrCopy.push(tuple);
+          if (!cuisinesIncluded[cuisine]) {
+            const tuple = [cuisine, true];
+            arrCopy.push(tuple);
+            cuisinesIncluded[cuisine] = true;
+          }
         });
         return arrCopy;
       }, []);
-      setUserSelections({ ...userSelections, cuisines: newCuisines });
+      console.log('newCuisines :>> ', newCuisines);
+      setUserSelections({ ...userSelections, cuisines: [...userSelections.cuisines, ...newCuisines] });
     }
   }, [originalData]);
 
   useEffect(() => {
-    const searchIfSelected = (array, cb) =>
-      array.reduce((arr, tuple, idx) => {
+    const searchIfSelected = (array, cb) => {
+      let formattedArray = [...array];
+      if (array[0][0].toString().toLowerCase() === 'all')
+        formattedArray = array.slice(1, array.length - 1);
+      return formattedArray.reduce((arr, tuple, idx) => {
         const [el, isSelected] = tuple;
         if (isSelected) arr.push(cb(el, idx));
         return arr;
       }, []);
+    };
 
     const query = {
       happyHourDays: searchIfSelected(
@@ -84,16 +97,24 @@ export default function UserSelections({ originalData, handleUpdate }) {
         el.toString()
       ),
       whatToGoFor: searchIfSelected(userSelections.whatToGoFor, (el) =>
-        el.toString()
+        el.toString().toUpperCase()
       ),
     };
-    updateSearch(query);
+    console.log('query :>> ', query);
+    setSearch(query);
   }, [userSelections]);
 
   // helpers
   const updateUserSelectionTupleValue = (key, idx, value) => {
     const newArr = [...userSelections[key]];
-    newArr[idx][1] = value;
+    const display = newArr[idx][0];
+    if (display.toString().toLowerCase() === 'all') {
+      newArr.forEach((el) => {
+        el[1] = value;
+      });
+    } else {
+      newArr[idx][1] = value;
+    }
     setUserSelections({
       ...userSelections,
       [key]: newArr,

@@ -24,20 +24,12 @@ export default function Home() {
 
   const originalRestaurants =
     (data.restaurants && data.restaurants.results) || [];
-  const restaurantData =
-    updatedResults && updatedResults.length
-      ? updatedResults
-      : originalRestaurants;
+  const restaurantData = updatedResults || originalRestaurants;
   useEffect(() => {
-    if (
-      !selectedRestaurant &&
-      data &&
-      data.restaurants &&
-      data.restaurants.results
-    ) {
-      setSelectedRestaurant(data.restaurants.results[0]);
+    if (restaurantData) {
+      setSelectedRestaurant(restaurantData[0]);
     }
-  }, [data]);
+  }, [restaurantData]);
 
   useEffect(() => {
     function checkIfAtTop() {
@@ -88,7 +80,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="right-side">
-                {selectedRestaurant && (
+                {selectedRestaurant ? (
                   <div className="hero-container">
                     <div
                       className="image-div"
@@ -99,6 +91,8 @@ export default function Home() {
                     />
                     <RestaurantDetails restaurant={selectedRestaurant} />
                   </div>
+                ) : (
+                  <div className="no-results">no results!</div>
                 )}
               </div>
             </div>
@@ -110,7 +104,11 @@ export default function Home() {
                     key={restaurant.id}
                     className="restaurants-container__restaurants--restaurant"
                   >
-                    <img src={restaurant.image} className="restaurant-image"/>
+                    <img
+                      alt={`${restaurant.name}`}
+                      src={restaurant.image}
+                      className="restaurant-image"
+                    />
                     <RestaurantDetails restaurant={restaurant} />
                   </div>
                 ))}

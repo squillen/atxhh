@@ -5,7 +5,7 @@ export default function RestaurantDetails({ restaurant }) {
   const { description, when, cuisine, url, name, price } = restaurant;
   const dollarSignsDisplay = [];
   for (let i = 0; i < 4; i++) {
-    if (i > +price)
+    if (i + 1> +price)
       dollarSignsDisplay.push(<span className="dollar-sign">$</span>);
     else dollarSignsDisplay.push(<span className="dollar-sign--green">$</span>);
   }
