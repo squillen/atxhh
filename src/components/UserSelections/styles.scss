@@ -1,3 +1,8 @@
+.user-selections__form {
+  position: absolute;
+  background-color: var(--color-transparent-white);
+}
+
 .dropdowns {
   display: flex;
   flex-wrap: wrap;
@@ -5,7 +10,7 @@
   align-items: flex-start;
   margin: 2rem 0;
   position: sticky;
-  top: 0
+  top: 0;
 }
 
 .selection {
@@ -17,9 +22,9 @@
     display: flex;
     flex-wrap: wrap;
   }
-   &--checkbox {
-    flex: 0 0 50%;  
-   }
+  &--checkbox {
+    flex: 0 0 50%;
+  }
 }
 
 .full-width {

@@ -1,20 +1,21 @@
 .home-container {
+  position: relative;
 }
 
 .selections {
+  width: 100%;
   &-container {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    width: 52%;
+    width: 60%;
     margin: 0 auto;
     z-index: 2;
-    padding: 1rem;
     transition: all 0.5s;
 
     &--white {
       @extend .selections-container;
-      background: rgba(255, 255, 255, 0.95);
+      background: var(--color-transparent-white);
       color: black;
     }
   }
@@ -25,6 +26,7 @@
   }
 
   &--show {
+    transition: all 1s ease;
     visibility: visible;
     height: auto;
   }

@@ -128,83 +128,85 @@ export default function UserSelections({ originalData, handleUpdate }) {
   };
 
   return (
-    <Form>
-      <div className="checkbox__selections">
-        <h3 className="checkbox__selections--header">I want:</h3>
-        {userSelections.whatToGoFor.map(([display, currentBool], idx) => (
-          <Checkbox
-            labelRight
-            key={display}
-            onChange={() =>
-              updateUserSelectionTupleValue('whatToGoFor', idx, !currentBool)
-            }
-            display={display}
-            checked={userSelections.whatToGoFor[idx][1]}
-          />
-        ))}
-      </div>
-      <div className="dropdowns">
-        <div className="selection">
-          <h4 className="selection--header">Cost:</h4>
-          <div className="selection--checkboxes">
-            {userSelections.prices.map(([display, currentBool], idx) => (
-              <div key={display} className="selection--checkbox">
+    <div className="user-selections__form">
+      <Form>
+        <div className="checkbox__selections">
+          <h3 className="checkbox__selections--header">I want:</h3>
+          {userSelections.whatToGoFor.map(([display, currentBool], idx) => (
+            <Checkbox
+              labelRight
+              key={display}
+              onChange={() =>
+                updateUserSelectionTupleValue('whatToGoFor', idx, !currentBool)
+              }
+              display={display}
+              checked={userSelections.whatToGoFor[idx][1]}
+            />
+          ))}
+        </div>
+        <div className="dropdowns">
+          <div className="selection">
+            <h4 className="selection--header">Cost:</h4>
+            <div className="selection--checkboxes">
+              {userSelections.prices.map(([display, currentBool], idx) => (
+                <div key={display} className="selection--checkbox">
+                  <Checkbox
+                    labelRight
+                    key={display}
+                    onChange={() =>
+                      updateUserSelectionTupleValue('prices', idx, !currentBool)
+                    }
+                    display={display}
+                    checked={userSelections.prices[idx][1]}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="selection">
+            <h4 className="selection--header">On:</h4>
+            <div className="selection--checkboxes">
+              {userSelections.selectedDays.map(([day, currentBool], idx) => (
+                <div key={day} className="selection--checkbox">
+                  <Checkbox
+                    labelRight
+                    key={day}
+                    onChange={() =>
+                      updateUserSelectionTupleValue(
+                        'selectedDays',
+                        idx,
+                        !currentBool
+                      )
+                    }
+                    display={day}
+                    checked={currentBool}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="selection full-width">
+            <Dropdown
+              headerTitle="Cuisines"
+              active={activeDropdown}
+              setActive={setActiveDropdown}
+            >
+              {userSelections.cuisines.map(([cuisine, currentBool], idx) => (
                 <Checkbox
                   labelRight
-                  key={display}
+                  key={cuisine}
                   onChange={() =>
-                    updateUserSelectionTupleValue('prices', idx, !currentBool)
+                    updateUserSelectionTupleValue('cuisines', idx, !currentBool)
                   }
-                  display={display}
-                  checked={userSelections.prices[idx][1]}
+                  display={cuisine.split('_').join(' ')}
+                  checked={userSelections.cuisines[idx][1]}
                 />
-              </div>
-            ))}
+              ))}
+            </Dropdown>
           </div>
         </div>
-        <div className="selection">
-          <h4 className="selection--header">On:</h4>
-          <div className="selection--checkboxes">
-            {userSelections.selectedDays.map(([day, currentBool], idx) => (
-              <div key={day} className="selection--checkbox">
-                <Checkbox
-                  labelRight
-                  key={day}
-                  onChange={() =>
-                    updateUserSelectionTupleValue(
-                      'selectedDays',
-                      idx,
-                      !currentBool
-                    )
-                  }
-                  display={day}
-                  checked={currentBool}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="selection full-width">
-          <Dropdown
-            headerTitle="Cuisines"
-            active={activeDropdown}
-            setActive={setActiveDropdown}
-          >
-            {userSelections.cuisines.map(([cuisine, currentBool], idx) => (
-              <Checkbox
-                labelRight
-                key={cuisine}
-                onChange={() =>
-                  updateUserSelectionTupleValue('cuisines', idx, !currentBool)
-                }
-                display={cuisine.split('_').join(' ')}
-                checked={userSelections.cuisines[idx][1]}
-              />
-            ))}
-          </Dropdown>
-        </div>
-      </div>
-    </Form>
+      </Form>
+    </div>
   );
 }
 
