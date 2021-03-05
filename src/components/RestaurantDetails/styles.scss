@@ -5,13 +5,20 @@
 }
 
 .restaurant-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   padding: 2rem;
   height: 100%;
+  overflow: scroll;
   color: black;
   background-color: whitesmoke;
   &__header {
     display: flex;
     justify-content: space-between;
+    a {
+      color: var(--color-link-blue);
+    }
     &-main {
       width: fit-content;
       font-size: 3.5rem;
@@ -30,19 +37,35 @@
     }
   }
   &__info {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    overflow: scroll;
     // padding: 1rem 0;
-    width: 90%;
     .menu {
       a {
         color: var(--color-link-blue);
       }
     }
     .detail {
+      overflow: scroll;
+      display: flex;
+      width: 90%;
+
       margin: 1rem 0;
       &__header {
         font-weight: 700;
         font-size: 1.6rem;
+        margin-right: 1rem;
+      }
+      &__text {
+        align-self: center;
+        overflow: scroll;
+        display: block;
+      }
+      &__description {
+        // height: 13rem;
+        align-self: center;
+        overflow: scroll;
+        display: block;
       }
     }
   }
@@ -64,10 +87,10 @@
 }
 
 .dollar-sign {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   &--green {
     color: rgb(2, 88, 2);
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 }

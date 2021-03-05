@@ -25,6 +25,7 @@ export default function RestaurantDetails({ restaurant }) {
     url,
     name,
     price,
+    address,
   } = restaurant;
   const dollarSignsDisplay = [];
   for (let i = 0; i < 4; i++) {
@@ -50,11 +51,24 @@ export default function RestaurantDetails({ restaurant }) {
         <div className="restaurant-details__header">
           <div className="left">
             <h3 className="restaurant-details__header-main">
-              <a href={url}>{name}</a>
+              <a target={`${name}-site`} rel="noreferrer" href={url}>
+                {name}
+              </a>
             </h3>
             <sub className="restaurant-details__header-sub">
-              {cuisine.map((el) => el.split('_').join(' ')).join(' / ')}
-              <div>{dollarSignsDisplay}</div>
+              <div className="cuisines">
+                {cuisine.map((el) => el.split('_').join(' ')).join(' / ')}
+              </div>
+              <div className="address">
+                <a
+                  target={`${name}-map`}
+                  rel="noreferrer"
+                  href={`https://www.google.com/maps/place/${address}`}
+                >
+                  {address}
+                </a>
+              </div>
+              <div className="dollar-signs">{dollarSignsDisplay}</div>
             </sub>
           </div>
           <div className="right">
@@ -63,12 +77,12 @@ export default function RestaurantDetails({ restaurant }) {
         </div>
         <div className="restaurant-details__info">
           <div className="detail">
-            <span className="detail__header">When: </span>
-            <span className="detail__text">{when}</span>
+            <div className="detail__header">When: </div>
+            <div className="detail__text">{when}</div>
           </div>
           <div className="detail">
-            <span className="detail__header">What: </span>
-            <span className="detail__text">{description}</span>
+            <div className="detail__header">What: </div>
+            <div className="detail__description">{description}</div>
           </div>
           {menu && (
             <div className="menu">

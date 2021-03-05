@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { displayCuisines } from '../../utils/helpers';
 import './styles.scss';
 
 export default function Restaurant({ restaurant }) {
@@ -38,7 +39,7 @@ export default function Restaurant({ restaurant }) {
             <a href={url}>{name}</a>
           </h3>
           <sub className="hero-container__body--header-sub">
-            {cuisine.map((el) => el.split('_').join(' ')).join(' / ')}
+            {displayCuisines(cuisine)}
             <div>{dollarSignsDisplay}</div>
           </sub>
         </div>

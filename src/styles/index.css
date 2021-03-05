@@ -40,14 +40,14 @@ body {
   font-family: var(--standard-font);
   font-weight: 500;
   line-height: 1.6;
-  background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+  /* background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark)); */
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
-  color: #fff;
+  color: black;
 }
 
 a {
-  color: #fff;
+  color: black;
   text-decoration: none;
 }

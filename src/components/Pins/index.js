@@ -6,7 +6,7 @@ const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,
   C20.1,15.8,20.2,15.8,20.2,15.7z`;
 
 const SIZE = 25;
-function Pins({ data, onClick }) {
+function Pins({ data, onClick, onHover }) {
   return data.map((restaurant) => (
     <Marker
       key={`marker-${restaurant.id}`}
@@ -23,6 +23,7 @@ function Pins({ data, onClick }) {
           transform: `translate(${-SIZE / 2}px,${-SIZE}px)`,
         }}
         onClick={() => onClick(restaurant)}
+        onMouseOver={() => onHover(restaurant)}
       >
         <path d={ICON} />
       </svg>

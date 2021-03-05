@@ -37,6 +37,7 @@ const scaleControlStyle = {
 
 function Map({ data, onClick, selectedRestaurant }) {
   const [showPopup, setShowPopup] = useState(false);
+  const [popupRestaurant, setPopupRestaurant] = useState(null);
   const firstCoords = (data[0] && data[0].coordinates) || {};
   const [viewport, setViewport] = useState({
     latitude: +firstCoords.lat || 30.2717852,
@@ -48,6 +49,11 @@ function Map({ data, onClick, selectedRestaurant }) {
 
   const handleClick = (arg) => {
     onClick(arg);
+    setShowPopup(!showPopup);
+  };
+
+  const handleHover = (arg) => {
+    setPopupRestaurant(arg)
     setShowPopup(!showPopup);
   };
 
@@ -64,17 +70,17 @@ function Map({ data, onClick, selectedRestaurant }) {
       onViewportChange={setViewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
-      <Pins data={data} onClick={handleClick} />
-      {selectedRestaurant && showPopup && (
+      <Pins data={data} onHover={handleHover} onClick={handleClick} />
+      {popupRestaurant && showPopup && (
         <Popup
           tipSize={5}
           anchor="top-left"
-          longitude={+selectedRestaurant.coordinates.lng}
-          latitude={+selectedRestaurant.coordinates.lat}
+          longitude={+popupRestaurant.coordinates.lng}
+          latitude={+popupRestaurant.coordinates.lat}
           closeOnClick={false}
           onClose={() => setShowPopup(false)}
         >
-          <PopupInfo selectedRestaurant={selectedRestaurant} />
+          <PopupInfo selectedRestaurant={popupRestaurant} />
         </Popup>
       )}
       <GeolocateControl style={geolocateStyle} />

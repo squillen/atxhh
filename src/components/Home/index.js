@@ -63,7 +63,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="">
+      <div className="restaurants-section" onClick={showSelections ? () => setShowSelections(false) : null}>
         {loading ? (
           <Loading>loading...</Loading>
         ) : (
@@ -106,10 +106,12 @@ export default function Home() {
                     key={restaurant.id}
                     className="restaurants-container__restaurants--restaurant"
                   >
-                    <img
-                      alt={`${restaurant.name}`}
-                      src={restaurant.image}
-                      className="restaurant-image"
+                    <div
+                      className="restaurant-image-div"
+                      style={{
+                        background: `url(${restaurant.image}) center no-repeat`,
+                        backgroundSize: 'cover',
+                      }}
                     />
                     <RestaurantDetails restaurant={restaurant} />
                   </div>

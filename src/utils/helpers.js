@@ -1,4 +1,4 @@
-import { AUTH_TOKEN, USER_ID } from "../constants";
+import { AUTH_TOKEN, USER_ID } from '../constants';
 
 // GETTERS
 export function getLocalItem(item) {
@@ -12,7 +12,6 @@ export function getAuth() {
 export function getUserIDFromLocalStorage() {
   return getLocalItem(USER_ID);
 }
-
 
 // SETTERS
 export function setLocalItem(key, value) {
@@ -50,24 +49,35 @@ function timeDifference(current, previous) {
   const elapsed = current - previous;
 
   if (elapsed < milliSecondsPerMinute / 3) {
-    return "just now";
+    return 'just now';
   }
 
   if (elapsed < milliSecondsPerMinute) {
-    return "less than 1 min ago";
-  } if (elapsed < milliSecondsPerHour) {
-    return `${Math.round(elapsed / milliSecondsPerMinute)  } min ago`;
-  } if (elapsed < milliSecondsPerDay) {
-    return `${Math.round(elapsed / milliSecondsPerHour)  } h ago`;
-  } if (elapsed < milliSecondsPerMonth) {
-    return `${Math.round(elapsed / milliSecondsPerDay)  } days ago`;
-  } if (elapsed < milliSecondsPerYear) {
-    return `${Math.round(elapsed / milliSecondsPerMonth)  } mo ago`;
-  } 
-    return `${Math.round(elapsed / milliSecondsPerYear)  } years ago`;
+    return 'less than 1 min ago';
+  }
+  if (elapsed < milliSecondsPerHour) {
+    return `${Math.round(elapsed / milliSecondsPerMinute)} min ago`;
+  }
+  if (elapsed < milliSecondsPerDay) {
+    return `${Math.round(elapsed / milliSecondsPerHour)} h ago`;
+  }
+  if (elapsed < milliSecondsPerMonth) {
+    return `${Math.round(elapsed / milliSecondsPerDay)} days ago`;
+  }
+  if (elapsed < milliSecondsPerYear) {
+    return `${Math.round(elapsed / milliSecondsPerMonth)} mo ago`;
+  }
+  return `${Math.round(elapsed / milliSecondsPerYear)} years ago`;
 }
 
 export function timeDifferenceForDate(date) {
   const now = new Date().getTime();
   return timeDifference(now, date);
+}
+
+// RESTAURANT HELPERS
+export function displayCuisines(cuisines) {
+  return cuisines
+    .map((e) => e.split('_').join(' '))
+    .join(' / ');
 }
