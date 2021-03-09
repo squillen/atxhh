@@ -17,6 +17,7 @@
       @extend .selections-container;
       background: var(--color-transparent-white);
       color: black;
+      z-index: 3; // over mapbox info
     }
   }
 
@@ -79,9 +80,11 @@
 .image-div {
   flex: 0 0 33.33%;
   height: 30%;
+  cursor: pointer;
 }
 
 .restaurant-image-div {
   flex: 0 0 33.33%;
   height: 100%;
+  cursor: pointer;
 }

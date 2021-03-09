@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Badge from '../Badge';
+import Modal from '../Modal';
+import ReportProblems from '../ReportProblems';
 import './styles.scss';
 
 const ratings = {
@@ -16,7 +19,9 @@ const ratings = {
 };
 
 export default function RestaurantDetails({ restaurant }) {
+  const [showProblemModal, setShowProblemModal] = useState(false);
   const {
+    id,
     menu,
     rating,
     description,
@@ -26,12 +31,22 @@ export default function RestaurantDetails({ restaurant }) {
     name,
     price,
     address,
+    warnings,
   } = restaurant;
   const dollarSignsDisplay = [];
   for (let i = 0; i < 4; i++) {
     if (i + 1 > +price)
-      dollarSignsDisplay.push(<span className="dollar-sign">$</span>);
-    else dollarSignsDisplay.push(<span className="dollar-sign--green">$</span>);
+      dollarSignsDisplay.push(
+        <span key={i} className="dollar-sign">
+          $
+        </span>
+      );
+    else
+      dollarSignsDisplay.push(
+        <span key={i} className="dollar-sign--green">
+          $
+        </span>
+      );
   }
   const badgeLabel = rating ? (
     rating === 'NA' ? (
@@ -57,7 +72,9 @@ export default function RestaurantDetails({ restaurant }) {
             </h3>
             <sub className="restaurant-details__header-sub">
               <div className="cuisines">
-                {cuisine.map((el) => el.split('_').join(' ')).join(' / ')}
+                {cuisine
+                  .map((el) => <span key={el}>{el.split('_').join(' ')}</span>)
+                  .join(' / ')}
               </div>
               <div className="address">
                 <a
@@ -73,6 +90,12 @@ export default function RestaurantDetails({ restaurant }) {
           </div>
           <div className="right">
             {badgeLabel && <Badge label={badgeLabel} />}
+            <div
+              className="report-problem"
+              onClick={() => setShowProblemModal(true)}
+            >
+              report a problem
+            </div>
           </div>
         </div>
         <div className="restaurant-details__info">
@@ -93,6 +116,12 @@ export default function RestaurantDetails({ restaurant }) {
           )}
         </div>
       </div>
+      <Modal
+        display={showProblemModal}
+        handleClose={() => setShowProblemModal(false)}
+      >
+        <ReportProblems restaurantID={id} warnings={warnings} />
+      </Modal>
     </div>
   );
 }

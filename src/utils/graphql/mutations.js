@@ -19,7 +19,7 @@ export const CREATE_RESTAURANT_MUTATION = gql`
     create(
       name: $name
       url: $url
-      description: $description,
+      description: $description
       happyHourDays: $happyHourDays
       startTime: $startTime
       endTime: $endTime
@@ -31,6 +31,14 @@ export const CREATE_RESTAURANT_MUTATION = gql`
       id
       url
       description
+    }
+  }
+`;
+
+export const UPDATE_RESTAURANT_MUTATION = gql`
+  mutation UpdateMutation($id: ID!, $data: UpdateData!) {
+    updateRestaurant(id: $id, data: $data) {
+      success
     }
   }
 `;

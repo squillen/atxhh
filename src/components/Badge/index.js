@@ -6,5 +6,5 @@ export default function Badge({ label }) {
 }
 
 Badge.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };

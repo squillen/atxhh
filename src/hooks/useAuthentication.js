@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { PROFILE_QUERY } from '../utils/graphql/queries';
 
 export function useAuthentication(id, change) {
-  const [result, setResult] = useState(null);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     if (id) {
@@ -15,8 +15,8 @@ export function useAuthentication(id, change) {
         variables: { id },
       });
       if (client && change) client.resetStore();
-      setResult(!!currentUser);
+      setUser(!!currentUser);
     }
   }, [id, change]);
-  return result;
+  return user;
 }

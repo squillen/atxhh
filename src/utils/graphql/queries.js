@@ -31,7 +31,8 @@ export const RESTAURANTS_QUERY = gql`
         when
         rating
         warnings {
-          message
+          WRONG_TIMES
+          NO_LONGER_ACTIVE
         }
         active
         menu

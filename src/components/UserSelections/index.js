@@ -38,12 +38,11 @@ export default function UserSelections({ originalData, handleUpdate }) {
   const [activeDropdown, setActiveDropdown] = useState('');
   const [search, setSearch] = useState({});
   const [userSelections, setUserSelections] = useState(initialState);
-  const { data = {}, error, loading, refetch } = useQuery(RESTAURANTS_QUERY, {
+  const { data, refetch } = useQuery(RESTAURANTS_QUERY, {
     variables: search,
   });
 
   useEffect(() => {
-    console.log('data :>> ', data);
     if (data && data.restaurants) {
       handleUpdate(data.restaurants.results);
     }

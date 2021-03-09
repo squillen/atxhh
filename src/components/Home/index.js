@@ -41,6 +41,7 @@ export default function Home() {
       document.removeEventListener('scroll', checkIfAtTop);
     };
   }, []);
+  // TODO clean up how this is rendered (i.e. better loading)
   return (
     <div className="home-container">
       <div
@@ -63,7 +64,10 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="restaurants-section" onClick={showSelections ? () => setShowSelections(false) : null}>
+      <div
+        className="restaurants-section"
+        onClick={showSelections ? () => setShowSelections(false) : null}
+      >
         {loading ? (
           <Loading>loading...</Loading>
         ) : (
@@ -71,18 +75,23 @@ export default function Home() {
             {/* MAP SECTION */}
             <div className="map-section">
               <div className="left-side">
-                <div className="map">
-                  <Map
-                    data={restaurantData}
-                    onClick={setSelectedRestaurant}
-                    selectedRestaurant={selectedRestaurant}
-                  />
-                </div>
+                {selectedRestaurant && (
+                  <div className="map">
+                    <Map
+                      data={restaurantData}
+                      onClick={setSelectedRestaurant}
+                      selectedRestaurant={selectedRestaurant}
+                    />
+                  </div>
+                )}
               </div>
               <div className="right-side">
                 {selectedRestaurant ? (
                   <div className="hero-container">
                     <div
+                      onClick={() =>
+                        window.open(selectedRestaurant.url, '_blank')
+                      }
                       className="image-div"
                       style={{
                         background: `url(${selectedRestaurant.image}) center no-repeat`,
@@ -108,6 +117,7 @@ export default function Home() {
                   >
                     <div
                       className="restaurant-image-div"
+                      onClick={() => window.open(restaurant.url, '_blank')}
                       style={{
                         background: `url(${restaurant.image}) center no-repeat`,
                         backgroundSize: 'cover',

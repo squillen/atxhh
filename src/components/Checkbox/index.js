@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
 import './styles.scss';
 
-export default function Checkbox({ labelRight, display, onChange, checked }) {
+export default function Checkbox({
+  labelRight,
+  display,
+  onChange,
+  checked,
+  type = 'checkbox',
+}) {
   return (
     <div
       onClick={onChange}
@@ -17,7 +23,7 @@ export default function Checkbox({ labelRight, display, onChange, checked }) {
         onChange={onChange}
         checked={checked}
         className="checkbox--input"
-        type="checkbox"
+        type={type}
         name={display}
         value={display}
       />

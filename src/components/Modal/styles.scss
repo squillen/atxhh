@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  z-index: 4;
 
   &__children {
     position: relative;
@@ -19,6 +20,7 @@
     overflow-y: scroll;
     background: white;
     padding: 3rem;
+    z-index: inherit;
 
     & .close-btn {
       position: absolute;
