@@ -1,5 +1,6 @@
 .restaurant-details-container {
   flex: 1;
+  height: 100%;
   box-sizing: border-box;
   background: whitesmoke;
 }
@@ -15,7 +16,6 @@
   background-color: whitesmoke;
   &__header {
     display: flex;
-    min-height: 40%;
     justify-content: space-between;
     a {
       color: var(--color-link-blue);
@@ -38,8 +38,12 @@
     }
   }
   &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     font-size: 1.2rem;
     overflow: scroll;
+    min-height: 60%;
     // padding: 1rem 0;
     .menu {
       a {

@@ -36,7 +36,7 @@ export const CREATE_RESTAURANT_MUTATION = gql`
 `;
 
 export const UPDATE_RESTAURANT_MUTATION = gql`
-  mutation UpdateMutation($id: ID!, $data: UpdateData!) {
+  mutation UpdateRestaurantMutation($id: ID!, $data: UpdateData!) {
     updateRestaurant(id: $id, data: $data) {
       success
     }

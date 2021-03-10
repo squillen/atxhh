@@ -9,16 +9,37 @@ import Button from '../Button';
 import Form from '../Form';
 
 // HELPERS
-import { useAuthentication } from '../../hooks/useAuthentication';
+import {
+  canUserReportRestaurantProblem,
+  updateUserReportedProblems,
+} from '../../utils/helpers';
 
 const potentialProblems = [
-  ['Wrong hours/days', false, 'WRONG_HOURS'],
+  ['Wrong hours/days', false, 'WRONG_TIMES'],
   ['No longer applicable', false, 'NO_LONGER_ACTIVE'],
 ];
 
 export default function ReportProblems({ restaurantID, warnings }) {
-  const currentUser = useAuthentication();
-  const [updateRestaurant] = useMutation(UPDATE_RESTAURANT_MUTATION);
+  const userCanSubmitWarnings = canUserReportRestaurantProblem(restaurantID);
+  console.log('userCanSubmitWarnings :>> ', userCanSubmitWarnings);
+  const [alreadyReportedProblem, setAlreadyReportedProblem] = useState(
+    !userCanSubmitWarnings
+  );
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
+  const [submissionError, setSubmissionError] = useState(false);
+  const handleCompleted = (id) => {
+    setSubmissionSuccess(true);
+    return updateUserReportedProblems(id);
+  };
+  const handleError = (error) => {
+    console.error('ERROR in catch!:::', error);
+    return setSubmissionError(true);
+  };
+  const [updateRestaurant] = useMutation(UPDATE_RESTAURANT_MUTATION, {
+    ignoreResults: true,
+    onCompleted: () => handleCompleted(restaurantID),
+    onError: (err) => handleError(),
+  });
   const [problems, setProblems] = useState(potentialProblems);
   const handleChange = (idx, newBool) => {
     const newProblems = [...problems];
@@ -26,31 +47,34 @@ export default function ReportProblems({ restaurantID, warnings }) {
     setProblems(newProblems);
   };
 
-  const submitInfo = () => {
-    const warningsCopy = warnings ? { ...warnings } : {};
-    const newWarnings = problems.reduce((obj, [display, isTrue, key]) => {
-      if (isTrue) {
-        obj[key] = warningsCopy[key] > 0 ? warningsCopy[key] + 1 : 1;
-      }
-      return obj;
-    }, {});
-    console.log('newWarnings :>> ', newWarnings);
-    updateRestaurant({
-      ignoreResults: true,
-      variables: {
-        id: restaurantID,
-        data: {
-          warnings: newWarnings,
+  const submitInfo = (e) => {
+    e.preventDefault();
+    if (userCanSubmitWarnings) {
+      const warningsCopy =
+        warnings && Object.keys(warnings).length ? { ...warnings } : {};
+      const { __typename, ...warningsWithoutType } = warningsCopy;
+      const newWarnings = problems.reduce((obj, [display, isTrue, key]) => {
+        if (isTrue) {
+          obj[key] = obj[key] >= 0 ? obj[key] + 1 : 1;
+        }
+        return obj;
+      }, warningsWithoutType);
+      updateRestaurant({
+        variables: {
+          id: restaurantID,
+          data: {
+            warnings: { ...newWarnings },
+          },
         },
-      },
-      onCompleted: ({ result }) => console.log('RESULT:::', result),
-      onError: (err) => console.error('ERROR:::', err),
-    });
+      });
+    } else {
+      setAlreadyReportedProblem(true);
+    }
   };
-  return (
-    <div className="problems-container">
+  const reportProblemsDisplay = (
+    <>
       <div className="problems-container__header">
-        <div className="text">oh no! what's wrong?</div>
+        <h1 className="text">butter my biscuit! what's wrong?</h1>
       </div>
       <Form>
         {problems.map(([display, bool], idx) => (
@@ -69,8 +93,31 @@ export default function ReportProblems({ restaurantID, warnings }) {
           onClick={submitInfo}
         />
       </Form>
-    </div>
+    </>
   );
+  const alreadyReportedProblemDisplay = (
+    <>
+      <div className="header">
+        <h1>Ah, shiitake!</h1>
+        <h2>It looks like you've already notified us of errors within the past 24 hours. Let us know a little later on. Thanks, hot sauce.</h2>
+      </div>
+    </>
+  );
+  const submissionSuccessDisplay = (
+    <>
+      <div className="header">Thanks for letting us know.</div>
+    </>
+  )
+  const submissionErrorDisplay = (
+    <>
+      <div className="header">Boo. We weren't able to report that. Try again?</div>
+    </>
+  )
+  let display = reportProblemsDisplay;
+  if (alreadyReportedProblem) display = alreadyReportedProblemDisplay;
+  if (submissionSuccess) display = submissionSuccessDisplay
+  if (submissionError) display = submissionErrorDisplay
+  return <div className="problems-container">{display}</div>;
 }
 
 ReportProblems.defaultProps = {

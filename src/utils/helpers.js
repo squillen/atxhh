@@ -1,8 +1,13 @@
-import { AUTH_TOKEN, USER_ID } from '../constants';
+import { AUTH_TOKEN, USER_ID, REPORTED_PROBLEMS } from '../constants';
 
+const milliSecondsPerMinute = 60 * 1000;
+const milliSecondsPerHour = milliSecondsPerMinute * 60;
+const milliSecondsPerDay = milliSecondsPerHour * 24;
+const milliSecondsPerMonth = milliSecondsPerDay * 30;
+const milliSecondsPerYear = milliSecondsPerDay * 365;
 // GETTERS
 export function getLocalItem(item) {
-  return localStorage.getItem(item);
+  return JSON.parse(localStorage.getItem(item));
 }
 
 export function getAuth() {
@@ -13,9 +18,13 @@ export function getUserIDFromLocalStorage() {
   return getLocalItem(USER_ID);
 }
 
+export function getUserReportedProblemsFromLS() {
+  return getLocalItem(REPORTED_PROBLEMS);
+}
+
 // SETTERS
 export function setLocalItem(key, value) {
-  return localStorage.setItem(key, value);
+  return localStorage.setItem(key, JSON.stringify(value));
 }
 
 export function removeLocalItem(key) {
@@ -38,14 +47,31 @@ export function removeAuthFromLocalStorage() {
   return removeLocalItem(AUTH_TOKEN);
 }
 
+// HELPERS
+export function canUserReportRestaurantProblem(id) {
+  const userReportedProblems = getUserReportedProblemsFromLS() || {};
+  console.log('JSON.parse(userReportedProblems) :>> ', userReportedProblems);
+  console.log('userReportedProblems[id] :>> ', userReportedProblems[id]);
+  if (userReportedProblems[id]) {
+    console.log('Date.now() - userReportedProblems[id] :>> ', Date.now() - userReportedProblems[id]);
+    console.log('milliSecondsPerDay :>> ', milliSecondsPerDay);
+    const oneDayHasElapsedSinceLastReport =
+      Date.now() - userReportedProblems[id] > milliSecondsPerDay;
+      console.log('oneDayHasElapsedSinceLastReport :>> ', oneDayHasElapsedSinceLastReport);
+    return oneDayHasElapsedSinceLastReport;
+  }
+  return true;
+}
+
+export function updateUserReportedProblems(value) {
+  const userReportedProblems = getUserReportedProblemsFromLS() || {};
+  userReportedProblems[value] = Date.now();
+  console.log('userReportedProblems :>> ', userReportedProblems);
+  return setLocalItem(REPORTED_PROBLEMS, userReportedProblems);
+}
+
 // moment copycat
 function timeDifference(current, previous) {
-  const milliSecondsPerMinute = 60 * 1000;
-  const milliSecondsPerHour = milliSecondsPerMinute * 60;
-  const milliSecondsPerDay = milliSecondsPerHour * 24;
-  const milliSecondsPerMonth = milliSecondsPerDay * 30;
-  const milliSecondsPerYear = milliSecondsPerDay * 365;
-
   const elapsed = current - previous;
 
   if (elapsed < milliSecondsPerMinute / 3) {
@@ -77,7 +103,5 @@ export function timeDifferenceForDate(date) {
 
 // RESTAURANT HELPERS
 export function displayCuisines(cuisines) {
-  return cuisines
-    .map((e) => e.split('_').join(' '))
-    .join(' / ');
+  return cuisines.map((e) => e.split('_').join(' ')).join(' / ');
 }
