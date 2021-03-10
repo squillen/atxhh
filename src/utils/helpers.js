@@ -50,14 +50,9 @@ export function removeAuthFromLocalStorage() {
 // HELPERS
 export function canUserReportRestaurantProblem(id) {
   const userReportedProblems = getUserReportedProblemsFromLS() || {};
-  console.log('JSON.parse(userReportedProblems) :>> ', userReportedProblems);
-  console.log('userReportedProblems[id] :>> ', userReportedProblems[id]);
   if (userReportedProblems[id]) {
-    console.log('Date.now() - userReportedProblems[id] :>> ', Date.now() - userReportedProblems[id]);
-    console.log('milliSecondsPerDay :>> ', milliSecondsPerDay);
     const oneDayHasElapsedSinceLastReport =
       Date.now() - userReportedProblems[id] > milliSecondsPerDay;
-      console.log('oneDayHasElapsedSinceLastReport :>> ', oneDayHasElapsedSinceLastReport);
     return oneDayHasElapsedSinceLastReport;
   }
   return true;
@@ -66,7 +61,6 @@ export function canUserReportRestaurantProblem(id) {
 export function updateUserReportedProblems(value) {
   const userReportedProblems = getUserReportedProblemsFromLS() || {};
   userReportedProblems[value] = Date.now();
-  console.log('userReportedProblems :>> ', userReportedProblems);
   return setLocalItem(REPORTED_PROBLEMS, userReportedProblems);
 }
 

@@ -101,7 +101,6 @@ export default function UserSelections({ originalData, handleUpdate }) {
         el.toString().toUpperCase()
       ),
     };
-    console.log('query :>> ', query);
     setSearch(query);
   }, [userSelections]);
 
@@ -119,7 +118,6 @@ export default function UserSelections({ originalData, handleUpdate }) {
       }
       newArr[idx][1] = value;
     }
-    console.log('newArr :>> ', newArr);
     setUserSelections({
       ...userSelections,
       [key]: newArr,

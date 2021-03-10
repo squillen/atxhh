@@ -21,7 +21,6 @@ const potentialProblems = [
 
 export default function ReportProblems({ restaurantID, warnings }) {
   const userCanSubmitWarnings = canUserReportRestaurantProblem(restaurantID);
-  console.log('userCanSubmitWarnings :>> ', userCanSubmitWarnings);
   const [alreadyReportedProblem, setAlreadyReportedProblem] = useState(
     !userCanSubmitWarnings
   );
