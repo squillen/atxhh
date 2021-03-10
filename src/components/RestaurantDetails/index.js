@@ -4,19 +4,7 @@ import Badge from '../Badge';
 import Modal from '../Modal';
 import ReportProblems from '../ReportProblems';
 import './styles.scss';
-
-const ratings = {
-  ONE: '1',
-  TWO: '2',
-  THREE: '3',
-  FOUR: '4',
-  FIVE: '5',
-  SIX: '6',
-  SEVEN: '7',
-  EIGHT: '8',
-  NINE: '9',
-  TEN: '10',
-};
+import { displayCuisines, handleRating } from '../../utils/helpers';
 
 export default function RestaurantDetails({ restaurant }) {
   const [showProblemModal, setShowProblemModal] = useState(false);
@@ -53,7 +41,7 @@ export default function RestaurantDetails({ restaurant }) {
       <span className="na-rating">unrated</span>
     ) : (
       <span>
-        <big className="rating">{ratings[rating]}</big>
+        <big className="rating">{handleRating(rating)}</big>
         <span>
           <sub>/10</sub>
         </span>
@@ -72,9 +60,7 @@ export default function RestaurantDetails({ restaurant }) {
             </h3>
             <sub className="restaurant-details__header-sub">
               <div className="cuisines">
-                {cuisine
-                  .map((el) => <span key={el}>{el.split('_').join(' ')}</span>)
-                  .join(' / ')}
+                {displayCuisines(cuisine)}
               </div>
               <div className="address">
                 <a

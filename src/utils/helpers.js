@@ -97,5 +97,25 @@ export function timeDifferenceForDate(date) {
 
 // RESTAURANT HELPERS
 export function displayCuisines(cuisines) {
-  return cuisines.map((e) => e.split('_').join(' ')).join(' / ');
+  return cuisines.map((c, idx) => (
+    <span key={c}>
+      {`${c.split('_').join(' ')} ${idx !== cuisines.length - 1 ? '/ ' : ''}`}
+    </span>
+  ));
+}
+
+export function handleRating(rating) {
+  const ratings = {
+    ONE: '1',
+    TWO: '2',
+    THREE: '3',
+    FOUR: '4',
+    FIVE: '5',
+    SIX: '6',
+    SEVEN: '7',
+    EIGHT: '8',
+    NINE: '9',
+    TEN: '10',
+  };
+  return ratings[rating] || 'NA';
 }
