@@ -31,13 +31,13 @@ export default function ReportProblems({ restaurantID, warnings }) {
     return updateUserReportedProblems(id);
   };
   const handleError = (error) => {
-    console.error('ERROR in catch!:::', error);
+    console.error('ERROR:::', error);
     return setSubmissionError(true);
   };
   const [updateRestaurant] = useMutation(UPDATE_RESTAURANT_MUTATION, {
     ignoreResults: true,
     onCompleted: () => handleCompleted(restaurantID),
-    onError: (err) => handleError(),
+    onError: (err) => handleError(err),
   });
   const [problems, setProblems] = useState(potentialProblems);
   const handleChange = (idx, newBool) => {
@@ -52,8 +52,8 @@ export default function ReportProblems({ restaurantID, warnings }) {
       const warningsCopy =
         warnings && Object.keys(warnings).length ? { ...warnings } : {};
       const { __typename, ...warningsWithoutType } = warningsCopy;
-      const newWarnings = problems.reduce((obj, [display, isTrue, key]) => {
-        if (isTrue) {
+      const newWarnings = problems.reduce((obj, [display, isSelected, key]) => {
+        if (isSelected) {
           obj[key] = obj[key] >= 0 ? obj[key] + 1 : 1;
         }
         return obj;
@@ -73,7 +73,7 @@ export default function ReportProblems({ restaurantID, warnings }) {
   const reportProblemsDisplay = (
     <>
       <div className="problems-container__header">
-        <h1 className="text">butter my biscuit! what's wrong?</h1>
+        <h1 className="text">butter my biscuit! what&apos;s wrong?</h1>
       </div>
       <Form>
         {problems.map(([display, bool], idx) => (
@@ -98,24 +98,33 @@ export default function ReportProblems({ restaurantID, warnings }) {
     <>
       <div className="header">
         <h1>Ah, shiitake!</h1>
-        <h2>It looks like you've already notified us of errors within the past 24 hours. Let us know a little later on. Thanks, hot sauce.</h2>
+        <h2>
+          It looks like you&apos;ve already notified us of errors within the
+          past 24 hours. Let us know a little later on. Thanks, hot sauce.
+        </h2>
       </div>
     </>
   );
   const submissionSuccessDisplay = (
     <>
-      <div className="header">Thanks for letting us know.</div>
+      <div className="header">
+        <h1>Thanks for letting us know.</h1>
+        <h2>You&apos;re a real class act.</h2>
+      </div>
     </>
-  )
+  );
   const submissionErrorDisplay = (
     <>
-      <div className="header">Boo. We weren't able to report that. Try again?</div>
+      <div className="header">
+        <h1>Boo. We weren&apos;t able to report that.</h1>
+        <h2>Try again?</h2>
+      </div>
     </>
-  )
+  );
   let display = reportProblemsDisplay;
   if (alreadyReportedProblem) display = alreadyReportedProblemDisplay;
-  if (submissionSuccess) display = submissionSuccessDisplay
-  if (submissionError) display = submissionErrorDisplay
+  if (submissionSuccess) display = submissionSuccessDisplay;
+  if (submissionError) display = submissionErrorDisplay;
   return <div className="problems-container">{display}</div>;
 }
 
