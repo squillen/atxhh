@@ -1,0 +1,17 @@
+.footer {
+  display: flex;
+  align-items: center;
+  min-height: 15vh;
+  padding: 3rem;
+  &__list {
+    width: 30%;
+    margin: 0 auto;
+    font-size: 1.4rem;
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    .list-item {
+      cursor: pointer;
+    }
+  }
+}
