@@ -3,13 +3,13 @@ import { useQuery } from '@apollo/client';
 import { RESTAURANTS_QUERY } from '../utils/graphql/queries';
 
 // COMPONENTS
-import RestaurantDetails from './RestaurantDetails';
-import Loading from './Loading';
-import Error from './Error';
-import Map from './Map';
+import RestaurantDetails from '../components/RestaurantDetails';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
+import Map from '../components/Map';
 
-import UserSelections from './UserSelections';
-import Toggle from './Toggle';
+import UserSelections from '../components/UserSelections';
+import Toggle from '../components/Toggle';
 
 export default function Home() {
   const [updatedResults, setUpdatedResults] = useState([]);
