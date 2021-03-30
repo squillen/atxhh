@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: fit-content;
+  // text-transform: capitalize;
+  padding: 2rem;
+  & input {
+    height: 3rem;
+  }
+}

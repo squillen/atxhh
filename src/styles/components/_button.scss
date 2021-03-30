@@ -1,0 +1,14 @@
+.button-container {
+  cursor: pointer;
+  width: 16rem;
+  height: 4rem;
+  font-size: 2rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-button-light);
+  outline: none;
+  &:active {
+    outline: none;
+    box-shadow: var(--shadow-button-dark);
+    transform: translateY(2px);
+  }
+}
