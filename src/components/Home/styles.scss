@@ -91,3 +91,11 @@
   height: 100%;
   cursor: pointer;
 }
+
+.no-restaurants {
+  font-size: 3rem;
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
