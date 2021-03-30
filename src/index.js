@@ -17,7 +17,7 @@ import { getAuth } from './utils/helpers';
 
 const httpLink = createHttpLink({
   uri: 'http://127.0.0.1:4000/',
-  // uri: "https://atxhh-graphql.herokuapp.com/",
+  // uri: process.env.API_URL,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -45,7 +45,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// reportWebVitals(console.log);
+reportWebVitals(console.log);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

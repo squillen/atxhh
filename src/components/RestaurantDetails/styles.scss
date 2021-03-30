@@ -106,10 +106,10 @@
 .report-problem {
   cursor: pointer;
   transition: all 1s ease;
-  &:hover {
-    transform: scale(1.1);
-    letter-spacing: 1px;
-  }
+  // &:hover {
+  //   transform: scale(1.1);
+  //   letter-spacing: 1px;
+  // }
 }
 
 .dollar-sign {

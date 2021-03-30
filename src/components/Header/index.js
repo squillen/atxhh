@@ -21,7 +21,7 @@ export default function Header() {
             <li className="logo">
               <a href="/">ATXHH</a>
             </li>
-            {id ? (
+            {/* {id ? (
               <li
                 className="login-btn"
                 onClick={() => {
@@ -36,7 +36,7 @@ export default function Header() {
               <li className="login-btn" onClick={() => setShowLogin(true)}>
                 login
               </li>
-            )}
+            )} */}
           </ul>
         </nav>
       </header>
