@@ -113,9 +113,6 @@ export default function UserSelections({ originalData, handleUpdate }) {
         el[1] = value;
       });
     } else {
-      if (newArr[0][0].toString().toLowerCase() === 'all') {
-        newArr[0][1] = !userSelections.whatToGoFor[0][1];
-      }
       newArr[idx][1] = value;
     }
     setUserSelections({
