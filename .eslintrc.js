@@ -34,5 +34,12 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'no-plusplus': 'off',
     'no-nested-ternary': 'off',
+    'no-unused-vars': 'warn',
+    'no-shadow': 'warn',
+    'react/jsx-curly-newline': 'warn',
+    'react/jsx-props-no-spreading': 'warn',
+    'no-param-reassign': 'warn',
+    'no-use-before-define': 'warn',
+    'react/button-has-type': 'warn',
   },
 };
