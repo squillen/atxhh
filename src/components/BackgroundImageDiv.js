@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export default function BackgroundImageDiv({ image, styles }) {
   return (
     <div
-      className="image-div"
+      className='image-div'
       style={{
         background: `url(${image}) center no-repeat`,
         backgroundSize: 'cover',

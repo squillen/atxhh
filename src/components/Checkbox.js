@@ -11,23 +11,23 @@ export default function Checkbox({
     <div
       onClick={onChange}
       key={display}
-      className="checkbox__selections--selection"
+      className='checkbox__selections--selection'
     >
       {!labelRight && (
-        <label className="checkbox--label" htmlFor={display}>
+        <label className='checkbox--label' htmlFor={display}>
           {display}
         </label>
       )}
       <input
         onChange={onChange}
         checked={checked}
-        className="checkbox--input"
+        className='checkbox--input'
         type={type}
         name={display}
         value={display}
       />
       {labelRight && (
-        <label className="checkbox--label" htmlFor={display}>
+        <label className='checkbox--label' htmlFor={display}>
           {display}
         </label>
       )}

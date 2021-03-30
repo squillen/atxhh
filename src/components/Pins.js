@@ -15,7 +15,7 @@ function Pins({ data, onClick, onHover }) {
     >
       <svg
         height={SIZE}
-        viewBox="0 0 24 24"
+        viewBox='0 0 24 24'
         style={{
           cursor: 'pointer',
           fill: '#d00',

@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 export default function Modal({ display, children, handleClose }) {
   return (
     display && (
-      <div className="modal">
-        <div className="modal__children">
-          {handleClose && <div onClick={handleClose} className="close-btn">X</div>}
+      <div className='modal'>
+        <div className='modal__children'>
+          {handleClose && (
+            <div onClick={handleClose} className='close-btn'>
+              X
+            </div>
+          )}
           {children}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export default function Badge({ label }) {
-  return <div className="badge-container">{label}</div>;
+  return <div className='badge-container'>{label}</div>;
 }
 
 Badge.propTypes = {

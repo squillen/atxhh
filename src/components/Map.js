@@ -74,7 +74,7 @@ function Map({ data, onClick, selectedRestaurant }) {
       {...viewport}
       width={isDesktop ? '50vw' : ''}
       height={isDesktop ? '80vh' : '50vh'}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
+      mapStyle='mapbox://styles/mapbox/streets-v11'
       onViewportChange={setViewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
     >
@@ -82,7 +82,7 @@ function Map({ data, onClick, selectedRestaurant }) {
       {popupRestaurant && showPopup && (
         <Popup
           tipSize={5}
-          anchor="top-left"
+          anchor='top-left'
           longitude={+popupRestaurant.coordinates.lng}
           latitude={+popupRestaurant.coordinates.lat}
           closeOnClick={false}

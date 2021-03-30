@@ -18,7 +18,7 @@ export default function Home() {
   const [atTop, setAtTop] = useState(false);
   const { data = {}, error, loading } = useQuery(RESTAURANTS_QUERY);
 
-  if (error) return <Error error={error} label="error!" />;
+  if (error) return <Error error={error} label='error!' />;
 
   const originalRestaurants =
     (data.restaurants && data.restaurants.results) || [];
@@ -41,7 +41,7 @@ export default function Home() {
   }, []);
   // TODO clean up how this is rendered (i.e. better loading)
   return (
-    <div className="home-container">
+    <div className='home-container'>
       {loading ? (
         <Loading>loading...</Loading>
       ) : (
@@ -54,8 +54,8 @@ export default function Home() {
           >
             <Toggle
               toggle={showSelections}
-              showLabel="Show filters"
-              hideLabel="Hide filters"
+              showLabel='Show filters'
+              hideLabel='Hide filters'
               onClick={() => setShowSelections(!showSelections)}
             />
             <div
@@ -71,15 +71,15 @@ export default function Home() {
           </div>
           {restaurantData.length ? (
             <div
-              className="restaurants-section"
+              className='restaurants-section'
               onClick={showSelections ? () => setShowSelections(false) : null}
             >
-              <div className="restaurant-detail">
+              <div className='restaurant-detail'>
                 {/* MAP SECTION */}
-                <div className="map-section">
-                  <div className="left-side">
+                <div className='map-section'>
+                  <div className='left-side'>
                     {selectedRestaurant && (
-                      <div className="map">
+                      <div className='map'>
                         <Map
                           data={restaurantData}
                           onClick={setSelectedRestaurant}
@@ -88,14 +88,14 @@ export default function Home() {
                       </div>
                     )}
                   </div>
-                  <div className="right-side">
+                  <div className='right-side'>
                     {selectedRestaurant ? (
-                      <div className="hero-container">
+                      <div className='hero-container'>
                         <div
                           onClick={() =>
                             window.open(selectedRestaurant.url, '_blank')
                           }
-                          className="image-div"
+                          className='image-div'
                           style={{
                             background: `url(${selectedRestaurant.image}) center no-repeat`,
                             backgroundSize: 'cover',
@@ -104,22 +104,22 @@ export default function Home() {
                         <RestaurantDetails restaurant={selectedRestaurant} />
                       </div>
                     ) : (
-                      <div className="no-results">no restaurant selected</div>
+                      <div className='no-results'>no restaurant selected</div>
                     )}
                   </div>
                 </div>
-                <div className="restaurants-container">
-                  <h2 className="restaurants-container__header">
+                <div className='restaurants-container'>
+                  <h2 className='restaurants-container__header'>
                     {`${restaurantData.length} Restaurants:`}
                   </h2>
-                  <div className="restaurants-container__restaurants">
+                  <div className='restaurants-container__restaurants'>
                     {restaurantData.map((restaurant) => (
                       <div
                         key={restaurant.id}
-                        className="restaurants-container__restaurants--restaurant"
+                        className='restaurants-container__restaurants--restaurant'
                       >
                         <div
-                          className="restaurant-image-div"
+                          className='restaurant-image-div'
                           onClick={() => window.open(restaurant.url, '_blank')}
                           style={{
                             background: `url(${restaurant.image}) center no-repeat`,
@@ -134,7 +134,7 @@ export default function Home() {
               </div>
             </div>
           ) : (
-            <div className="no-restaurants">
+            <div className='no-restaurants'>
               No restaurants match your filters.
             </div>
           )}

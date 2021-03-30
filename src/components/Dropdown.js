@@ -7,24 +7,24 @@ export default function Dropdown({ children, headerTitle, active, setActive }) {
     if (active !== headerTitle) setToggleList(false);
   }, [active]);
   return (
-    <div className="dd-wrapper">
+    <div className='dd-wrapper'>
       <button
-        type="button"
-        className="dd-btn"
+        type='button'
+        className='dd-btn'
         onClick={() => {
           setToggleList(!toggleList);
           setActive(headerTitle);
         }}
       >
-        <div className="dd-header--title">{headerTitle}</div>
+        <div className='dd-header--title'>{headerTitle}</div>
         {toggleList ? (
-          <i className="fas fa-angle-up" />
+          <i className='fas fa-angle-up' />
         ) : (
-          <i className="fas fa-angle-down" />
+          <i className='fas fa-angle-down' />
         )}
       </button>
       {toggleList && (
-        <div role="list" className="dd-list">
+        <div role='list' className='dd-list'>
           {children}
         </div>
       )}

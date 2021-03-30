@@ -11,15 +11,15 @@ export default function Error({ onClick, error }) {
   };
   return (
     <Modal display={showError}>
-      <div className="error-container">
-        <div className="error-container__upper">
-          <div className="error-container__upper--text">
+      <div className='error-container'>
+        <div className='error-container__upper'>
+          <div className='error-container__upper--text'>
             Party foul! There was an error.
           </div>
-          <div className="error-container__upper--text">{error.toString()}</div>
+          <div className='error-container__upper--text'>{error.toString()}</div>
         </div>
-        <div className="error-container__bottom">
-          <Button label="Close" onClick={handleClick} />
+        <div className='error-container__bottom'>
+          <Button label='Close' onClick={handleClick} />
         </div>
       </div>
     </Modal>

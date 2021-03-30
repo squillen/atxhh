@@ -28,7 +28,7 @@ export default function ReportProblems({
 }) {
   const userCanSubmitWarnings = canUserReportRestaurantProblem(restaurantID);
   const [alreadyReportedProblem, setAlreadyReportedProblem] = useState(
-    !userCanSubmitWarnings
+    !userCanSubmitWarnings,
   );
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
   const [submissionError, setSubmissionError] = useState(false);
@@ -78,16 +78,16 @@ export default function ReportProblems({
   };
   const reportProblemsDisplay = (
     <>
-      <div className="problems-container__header">
-        <div className="header-image">
+      <div className='problems-container__header'>
+        <div className='header-image'>
           <BackgroundImageDiv
-            image="./images/shiitake.jpg"
+            image='./images/shiitake.jpg'
             styles={{ borderRadius: '1rem' }}
           />
         </div>
       </div>
-      <div className="form-container">
-        <h2 className="text">What&apos;s wrong?</h2>
+      <div className='form-container'>
+        <h2 className='text'>What&apos;s wrong?</h2>
         <Form>
           {problems.map(([display, bool], idx) => (
             <Checkbox
@@ -101,9 +101,9 @@ export default function ReportProblems({
         </Form>
       </div>
       <Button
-        type="submit"
+        type='submit'
         styles={{ border: '3px solid #a33f4c' }}
-        label="Report"
+        label='Report'
         onClick={submitInfo}
       />
     </>
@@ -114,12 +114,12 @@ export default function ReportProblems({
     label = 'Close',
     onClick = handleClose,
   }) => (
-    <div className="container">
-      <div className="header">
+    <div className='container'>
+      <div className='header'>
         <h2>{h2}</h2>
         <h3>{h3}</h3>
       </div>
-      <Button type="button" label={label} onClick={onClick} />
+      <Button type='button' label={label} onClick={onClick} />
     </div>
   );
   const alreadyReportedProblemDisplay = createDisplay({
@@ -140,7 +140,7 @@ export default function ReportProblems({
   if (alreadyReportedProblem) display = alreadyReportedProblemDisplay;
   if (submissionSuccess) display = submissionSuccessDisplay;
   if (submissionError) display = submissionErrorDisplay;
-  return <div className="problems-container">{display}</div>;
+  return <div className='problems-container'>{display}</div>;
 }
 
 ReportProblems.defaultProps = {

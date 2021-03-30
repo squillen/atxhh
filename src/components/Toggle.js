@@ -2,16 +2,16 @@ import PropTypes from 'prop-types';
 
 export default function Toggle({ onClick, toggle, showLabel, hideLabel }) {
   return (
-    <div className="toggle" onClick={onClick}>
-      <div className="toggle--icon">
+    <div className='toggle' onClick={onClick}>
+      <div className='toggle--icon'>
         {toggle ? (
-          <i className="fas fa-angle-up" />
+          <i className='fas fa-angle-up' />
         ) : (
-          <i className="fas fa-angle-down" />
+          <i className='fas fa-angle-down' />
         )}
       </div>
       {showLabel && (
-        <h3 className="toggle--label">{toggle ? hideLabel : showLabel}</h3>
+        <h3 className='toggle--label'>{toggle ? hideLabel : showLabel}</h3>
       )}
     </div>
   );

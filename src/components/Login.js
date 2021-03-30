@@ -63,15 +63,15 @@ export default function Login({ showLogin, handleClose }) {
   return (
     <Modal display={showLogin} handleClose={handleClose}>
       {success ? (
-        <div className="success">woot woot! welcome aboard.</div>
+        <div className='success'>woot woot! welcome aboard.</div>
       ) : (
         <>
-          <center className="login-header">
-            <div className="login-header--main">
+          <center className='login-header'>
+            <div className='login-header--main'>
               {formState.login ? 'Login' : 'Signup'}
             </div>
             <sub
-              className="login-header--sub"
+              className='login-header--sub'
               onClick={() =>
                 setFormState({
                   ...formState,
@@ -81,14 +81,14 @@ export default function Login({ showLogin, handleClose }) {
             >
               {formState.login ? 'or signup' : 'or login'}
             </sub>
-            {error && <div className="error">{error}</div>}
+            {error && <div className='error'>{error}</div>}
           </center>
-          <Form buttonLabel="Submit" onClick={onClick}>
+          <Form buttonLabel='Submit' onClick={onClick}>
             {!formState.login && (
               <>
-                <label htmlFor="name">name</label>
+                <label htmlFor='name'>name</label>
                 <input
-                  name="name"
+                  name='name'
                   value={formState.name}
                   onChange={(e) =>
                     setFormState({
@@ -96,12 +96,12 @@ export default function Login({ showLogin, handleClose }) {
                       name: e.target.value,
                     })
                   }
-                  type="text"
-                  placeholder="Your name"
+                  type='text'
+                  placeholder='Your name'
                 />
               </>
             )}
-            <label htmlFor="email">email</label>
+            <label htmlFor='email'>email</label>
             <input
               onChange={(e) => {
                 setFormState({
@@ -109,18 +109,18 @@ export default function Login({ showLogin, handleClose }) {
                   email: e.target.value,
                 });
               }}
-              name="email"
-              type="text"
+              name='email'
+              type='text'
             />
-            <label htmlFor="password">password</label>
-            <span className="input-span">
+            <label htmlFor='password'>password</label>
+            <span className='input-span'>
               <input
-                name="password"
+                name='password'
                 type={showPassword ? 'text' : 'password'}
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="icon"
+                className='icon'
               >
                 {showPassword ? 'hide' : 'show'}
               </span>

@@ -24,23 +24,23 @@ export default function RestaurantDetails({ restaurant }) {
   for (let i = 0; i < 4; i++) {
     if (i + 1 > +price)
       dollarSignsDisplay.push(
-        <span key={i} className="dollar-sign">
+        <span key={i} className='dollar-sign'>
           $
-        </span>
+        </span>,
       );
     else
       dollarSignsDisplay.push(
-        <span key={i} className="dollar-sign--green">
+        <span key={i} className='dollar-sign--green'>
           $
-        </span>
+        </span>,
       );
   }
   const badgeLabel = rating ? (
     rating === 'NA' ? (
-      <span className="na-rating">unrated</span>
+      <span className='na-rating'>unrated</span>
     ) : (
       <span>
-        <span className="rating">{handleRating(rating)}</span>
+        <span className='rating'>{handleRating(rating)}</span>
         <span>
           <sub>/10</sub>
         </span>
@@ -48,51 +48,51 @@ export default function RestaurantDetails({ restaurant }) {
     )
   ) : null;
   return (
-    <div className="restaurant-details-container">
-      <div className="restaurant-details">
-        <div className="restaurant-details__header">
-          <div className="left">
-            <h3 className="restaurant-details__header-main">
-              <a target={`${name}-site`} rel="noreferrer" href={url}>
+    <div className='restaurant-details-container'>
+      <div className='restaurant-details'>
+        <div className='restaurant-details__header'>
+          <div className='left'>
+            <h3 className='restaurant-details__header-main'>
+              <a target={`${name}-site`} rel='noreferrer' href={url}>
                 {name}
               </a>
             </h3>
-            <sub className="restaurant-details__header-sub">
-              <div className="cuisines">{displayCuisines(cuisine)}</div>
-              <div className="address">
+            <sub className='restaurant-details__header-sub'>
+              <div className='cuisines'>{displayCuisines(cuisine)}</div>
+              <div className='address'>
                 <a
                   target={`${name}-map`}
-                  rel="noreferrer"
+                  rel='noreferrer'
                   href={`https://www.google.com/maps/place/${address}`}
                 >
                   {address}
                 </a>
               </div>
-              <div className="dollar-signs">{dollarSignsDisplay}</div>
+              <div className='dollar-signs'>{dollarSignsDisplay}</div>
             </sub>
           </div>
-          <div className="right">
+          <div className='right'>
             {badgeLabel && <Badge label={badgeLabel} />}
             <div
-              className="report-problem"
+              className='report-problem'
               onClick={() => setShowProblemModal(true)}
             >
               report a problem
             </div>
           </div>
         </div>
-        <div className="restaurant-details__info">
-          <div className="detail">
-            <div className="detail__header">When: </div>
-            <div className="detail__text">{when}</div>
+        <div className='restaurant-details__info'>
+          <div className='detail'>
+            <div className='detail__header'>When: </div>
+            <div className='detail__text'>{when}</div>
           </div>
-          <div className="detail">
-            <div className="detail__header">What: </div>
-            <div className="detail__description">{description}</div>
+          <div className='detail'>
+            <div className='detail__header'>What: </div>
+            <div className='detail__description'>{description}</div>
           </div>
           {menu && (
-            <div className="menu">
-              <a href={menu} target="_blank" rel="noreferrer">
+            <div className='menu'>
+              <a href={menu} target='_blank' rel='noreferrer'>
                 see menu
               </a>
             </div>

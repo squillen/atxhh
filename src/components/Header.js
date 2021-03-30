@@ -13,11 +13,11 @@ export default function Header() {
   const history = useHistory();
   return (
     <>
-      <header className="header-container">
-        <nav className="nav">
-          <ul className="nav__list">
-            <li className="logo-container">
-              <h1 className="logo-main">ATXHH</h1>
+      <header className='header-container'>
+        <nav className='nav'>
+          <ul className='nav__list'>
+            <li className='logo-container'>
+              <h1 className='logo-main'>ATXHH</h1>
               {/* <h4 className="logo-sub">austin happy hour</h4> */}
             </li>
             {/* {id ? (

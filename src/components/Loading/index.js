@@ -3,10 +3,10 @@ import './styles.scss';
 
 export default function Loading({ children }) {
   return (
-    <div className="loading-container">
-      <div className="loading-component">
-        <div className="loading" />
-        <div className="label">{children}</div>
+    <div className='loading-container'>
+      <div className='loading-component'>
+        <div className='loading' />
+        <div className='label'>{children}</div>
       </div>
     </div>
   );

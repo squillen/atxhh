@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export default function Button({ type, label, onClick, styles }) {
   return (
     <button
-      className="button-container"
+      className='button-container'
       type={type}
       style={styles}
       onClick={onClick}

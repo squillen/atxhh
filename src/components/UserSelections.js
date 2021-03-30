@@ -87,16 +87,16 @@ export default function UserSelections({ originalData, handleUpdate }) {
     const query = {
       happyHourDays: searchIfSelected(
         userSelections.selectedDays,
-        (el, index) => index.toString()
+        (el, index) => index.toString(),
       ),
       prices: searchIfSelected(userSelections.prices, (price) =>
-        price.length.toString()
+        price.length.toString(),
       ),
       cuisines: searchIfSelected(userSelections.cuisines, (el) =>
-        el.toString()
+        el.toString(),
       ),
       whatToGoFor: searchIfSelected(userSelections.whatToGoFor, (el) =>
-        el.toString().toUpperCase()
+        el.toString().toUpperCase(),
       ),
     };
     setSearch(query);
@@ -120,10 +120,10 @@ export default function UserSelections({ originalData, handleUpdate }) {
   };
 
   return (
-    <div className="user-selections__form">
+    <div className='user-selections__form'>
       <Form>
-        <div className="checkbox__selections">
-          <h3 className="checkbox__selections--header">I want:</h3>
+        <div className='checkbox__selections'>
+          <h3 className='checkbox__selections--header'>I want:</h3>
           {userSelections.whatToGoFor.map(([display, currentBool], idx) => (
             <Checkbox
               labelRight
@@ -136,12 +136,12 @@ export default function UserSelections({ originalData, handleUpdate }) {
             />
           ))}
         </div>
-        <div className="dropdowns">
-          <div className="selection">
-            <h4 className="selection--header">Cost:</h4>
-            <div className="selection--checkboxes">
+        <div className='dropdowns'>
+          <div className='selection'>
+            <h4 className='selection--header'>Cost:</h4>
+            <div className='selection--checkboxes'>
               {userSelections.prices.map(([display, currentBool], idx) => (
-                <div key={display} className="selection--checkbox">
+                <div key={display} className='selection--checkbox'>
                   <Checkbox
                     labelRight
                     key={display}
@@ -155,11 +155,11 @@ export default function UserSelections({ originalData, handleUpdate }) {
               ))}
             </div>
           </div>
-          <div className="selection">
-            <h4 className="selection--header">On:</h4>
-            <div className="selection--checkboxes">
+          <div className='selection'>
+            <h4 className='selection--header'>On:</h4>
+            <div className='selection--checkboxes'>
               {userSelections.selectedDays.map(([day, currentBool], idx) => (
-                <div key={day} className="selection--checkbox">
+                <div key={day} className='selection--checkbox'>
                   <Checkbox
                     labelRight
                     key={day}
@@ -167,7 +167,7 @@ export default function UserSelections({ originalData, handleUpdate }) {
                       updateUserSelectionTupleValue(
                         'selectedDays',
                         idx,
-                        !currentBool
+                        !currentBool,
                       )
                     }
                     display={day}
@@ -177,9 +177,9 @@ export default function UserSelections({ originalData, handleUpdate }) {
               ))}
             </div>
           </div>
-          <div className="selection full-width">
+          <div className='selection full-width'>
             <Dropdown
-              headerTitle="Cuisines"
+              headerTitle='Cuisines'
               active={activeDropdown}
               setActive={setActiveDropdown}
             >
