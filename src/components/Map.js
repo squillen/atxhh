@@ -10,6 +10,7 @@ import ReactMapGL, {
 import Pins from './Pins';
 import PopupInfo from './PopupInfo';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useWindowListeners } from '../hooks/helpers';
 
 const geolocateStyle = {
   top: 0,
@@ -35,9 +36,11 @@ const scaleControlStyle = {
   padding: '10px',
 };
 
+const mobileCheck = window.innerWidth < 900;
+
 function Map({ data, onClick, selectedRestaurant }) {
   const [showPopup, setShowPopup] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(!mobileCheck);
   const [popupRestaurant, setPopupRestaurant] = useState(null);
   const firstCoords = (data[0] && data[0].coordinates) || {};
   const [viewport, setViewport] = useState({
@@ -61,24 +64,16 @@ function Map({ data, onClick, selectedRestaurant }) {
   useEffect(() => {
     if (selectedRestaurant) setShowPopup(true);
   }, [selectedRestaurant]);
-
-  useEffect(() => {
-    function handleResize() {
-      const isMobile = window.innerWidth < '600';
-      console.log('isMobile :>> ', isMobile);
-      setIsDesktop(!isMobile);
-    }
-    document.addEventListener('resize', handleResize);
-    return () => {
-      document.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
+  function handleResize() {
+    const isMobile = mobileCheck;
+    setIsDesktop(!isMobile);
+  }
+  useWindowListeners('resize', handleResize);
   return (
     <ReactMapGL
       {...viewport}
-      width={isDesktop ? '50vw' : '100vw'}
-      height="80vh"
+      width={isDesktop ? '50vw' : ''}
+      height={isDesktop ? '80vh' : '50vh'}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onViewportChange={setViewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
