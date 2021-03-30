@@ -41,7 +41,7 @@ export default function RestaurantDetails({ restaurant }) {
       <span className="na-rating">unrated</span>
     ) : (
       <span>
-        <big className="rating">{handleRating(rating)}</big>
+        <span className="rating">{handleRating(rating)}</span>
         <span>
           <sub>/10</sub>
         </span>
@@ -59,9 +59,7 @@ export default function RestaurantDetails({ restaurant }) {
               </a>
             </h3>
             <sub className="restaurant-details__header-sub">
-              <div className="cuisines">
-                {displayCuisines(cuisine)}
-              </div>
+              <div className="cuisines">{displayCuisines(cuisine)}</div>
               <div className="address">
                 <a
                   target={`${name}-map`}
@@ -106,7 +104,11 @@ export default function RestaurantDetails({ restaurant }) {
         display={showProblemModal}
         handleClose={() => setShowProblemModal(false)}
       >
-        <ReportProblems restaurantID={id} warnings={warnings} />
+        <ReportProblems
+          restaurantID={id}
+          warnings={warnings}
+          handleClose={() => setShowProblemModal(false)}
+        />
       </Modal>
     </div>
   );

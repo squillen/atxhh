@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { UPDATE_RESTAURANT_MUTATION } from '../../utils/graphql/mutations';
+import './styles.scss';
 
 // COMPONENTS
 import Checkbox from '../Checkbox';
@@ -13,13 +14,19 @@ import {
   canUserReportRestaurantProblem,
   updateUserReportedProblems,
 } from '../../utils/helpers';
+import BackgroundImageDiv from '../BackgroundImageDiv';
 
 const potentialProblems = [
   ['Wrong hours/days', false, 'WRONG_TIMES'],
   ['No longer applicable', false, 'NO_LONGER_ACTIVE'],
+  ['Broken link', false, 'BROKEN_LINK'],
 ];
 
-export default function ReportProblems({ restaurantID, warnings }) {
+export default function ReportProblems({
+  restaurantID,
+  warnings,
+  handleClose,
+}) {
   const userCanSubmitWarnings = canUserReportRestaurantProblem(restaurantID);
   const [alreadyReportedProblem, setAlreadyReportedProblem] = useState(
     !userCanSubmitWarnings
@@ -73,54 +80,63 @@ export default function ReportProblems({ restaurantID, warnings }) {
   const reportProblemsDisplay = (
     <>
       <div className="problems-container__header">
-        <h1 className="text">butter my biscuit! what&apos;s wrong?</h1>
-      </div>
-      <Form>
-        {problems.map(([display, bool], idx) => (
-          <Checkbox
-            key={display}
-            labelRight
-            display={display}
-            checked={problems[idx][1]}
-            onChange={() => handleChange(idx, !bool)}
+        <div className="header-image">
+          <BackgroundImageDiv
+            image="./images/shiitake.jpg"
+            styles={{ borderRadius: '1rem' }}
           />
-        ))}
-        <Button
-          type="submit"
-          className="submit-btn"
-          label="submit"
-          onClick={submitInfo}
-        />
-      </Form>
-    </>
-  );
-  const alreadyReportedProblemDisplay = (
-    <>
-      <div className="header">
-        <h1>Ah, shiitake!</h1>
-        <h2>
-          It looks like you&apos;ve already notified us of errors within the
-          past 24 hours. Let us know a little later on. Thanks, hot sauce.
-        </h2>
+        </div>
       </div>
-    </>
-  );
-  const submissionSuccessDisplay = (
-    <>
-      <div className="header">
-        <h1>Thanks for letting us know.</h1>
-        <h2>You&apos;re a real class act.</h2>
+      <div className="form-container">
+        <h2 className="text">What&apos;s wrong?</h2>
+        <Form>
+          {problems.map(([display, bool], idx) => (
+            <Checkbox
+              key={display}
+              labelRight
+              display={display}
+              checked={problems[idx][1]}
+              onChange={() => handleChange(idx, !bool)}
+            />
+          ))}
+        </Form>
       </div>
+      <Button
+        type="submit"
+        styles={{ border: '3px solid #a33f4c' }}
+        label="Report"
+        onClick={submitInfo}
+      />
     </>
   );
-  const submissionErrorDisplay = (
-    <>
+  const createDisplay = ({
+    h2,
+    h3,
+    label = 'Close',
+    onClick = handleClose,
+  }) => (
+    <div className="container">
       <div className="header">
-        <h1>Boo. We weren&apos;t able to report that.</h1>
-        <h2>Try again?</h2>
+        <h2>{h2}</h2>
+        <h3>{h3}</h3>
       </div>
-    </>
+      <Button type="button" label={label} onClick={onClick} />
+    </div>
   );
+  const alreadyReportedProblemDisplay = createDisplay({
+    h2: 'Oye!',
+    h3:
+      "It looks like you've already notified us of errors for this restaurant within the past 24 hours. Let us know a little later on. Thanks, hot sauce.",
+  });
+  const submissionSuccessDisplay = createDisplay({
+    h2: 'Thanks for letting us know.',
+    h3: "You're putting the happy in happy hour.",
+  });
+  const submissionErrorDisplay = createDisplay({
+    h2: "Boo. We weren't able to report that.",
+    h3: 'Try again?',
+    onClick: submitInfo,
+  });
   let display = reportProblemsDisplay;
   if (alreadyReportedProblem) display = alreadyReportedProblemDisplay;
   if (submissionSuccess) display = submissionSuccessDisplay;
@@ -130,9 +146,11 @@ export default function ReportProblems({ restaurantID, warnings }) {
 
 ReportProblems.defaultProps = {
   warnings: {},
+  handleClose: () => {},
 };
 
 ReportProblems.propTypes = {
   restaurantID: PropTypes.string.isRequired,
   warnings: PropTypes.object,
+  handleClose: PropTypes.func,
 };

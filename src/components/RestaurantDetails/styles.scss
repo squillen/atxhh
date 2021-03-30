@@ -1,6 +1,7 @@
 .restaurant-details-container {
   flex: 1;
   height: 100%;
+  border-radius: 0 10px 10px 0;
   box-sizing: border-box;
   background: whitesmoke;
 }
@@ -13,7 +14,6 @@
   height: 100%;
   overflow: scroll;
   color: black;
-  background-color: whitesmoke;
   &__header {
     display: flex;
     justify-content: space-between;
@@ -68,7 +68,6 @@
       }
       &__description {
         // height: 13rem;
-        align-self: center;
         overflow: scroll;
         display: block;
       }
@@ -119,4 +118,8 @@
     font-weight: 700;
     font-size: 1.25rem;
   }
+}
+
+.rating {
+  font-size: 2.6rem;
 }

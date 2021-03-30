@@ -58,9 +58,10 @@
     max-height: 650px;
     overflow: scroll;
     &--restaurant {
+      max-width: 100rem;
       height: 35rem;
       display: flex;
-      margin: 1.5rem 0;
+      margin: 1.5rem auto;
     }
   }
 }
@@ -82,12 +83,12 @@
 
 .image-div {
   flex: 0 0 33.33%;
-  height: 30%;
   cursor: pointer;
 }
 
 .restaurant-image-div {
   flex: 0 0 33.33%;
+  border-radius: 10px 0 0 10px;
   height: 100%;
   cursor: pointer;
 }

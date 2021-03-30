@@ -12,7 +12,7 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import App from './components/App';
-import './styles/index.css';
+import './styles/index.scss';
 import { getAuth } from './utils/helpers';
 
 const httpLink = createHttpLink({

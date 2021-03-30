@@ -9,12 +9,23 @@
   list-style: none;
 }
 
-.logo {
+.logo-container {
   flex: 1 0 auto;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  font-family: var(--logo-font);
-  font-size: 6rem;
+  .logo-main {
+    font-family: var(--logo-font);
+    line-height: 6rem;
+    font-size: 6rem;
+    letter-spacing: 0.6rem;
+    font-weight: 500;
+  }
+  &-sub {
+    font-family: var(--standard-font);
+    font-size: 2rem;
+  }
 }
 
 .login-btn {
