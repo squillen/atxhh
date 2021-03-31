@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useQuery } from '@apollo/client';
 import { RESTAURANTS_QUERY } from '../utils/graphql/queries';
 
@@ -39,9 +40,15 @@ export default function Home() {
       document.removeEventListener('scroll', checkIfAtTop);
     };
   }, []);
-  // TODO clean up how this is rendered (i.e. better loading)
   return (
     <div className='home-container'>
+      <Helmet>
+        <meta charSet='utf-8' />
+        <meta
+          name='description'
+          content='An ever-growing list of happy hours restaurants in Austin, TX. Find out where to drink, eat, and be social in Austin.'
+        />
+      </Helmet>
       {loading ? (
         <Loading>loading...</Loading>
       ) : (
