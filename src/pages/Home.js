@@ -123,7 +123,7 @@ export default function Home() {
                     {restaurantData.map((restaurant) => (
                       <div
                         key={restaurant.id}
-                        className='restaurants-container__restaurants--restaurant'
+                        className='restaurant'
                       >
                         <div
                           className='restaurant-image-div'

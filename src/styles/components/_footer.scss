@@ -10,6 +10,9 @@
     display: flex;
     list-style: none;
     justify-content: space-around;
+    @include respond(tab-port) {
+      width: 100%;
+    }
     .list-item {
       cursor: pointer;
     }

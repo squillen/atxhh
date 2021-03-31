@@ -4,6 +4,10 @@
   border-radius: 0 10px 10px 0;
   box-sizing: border-box;
   background: whitesmoke;
+  @include respond(tab-port) {
+    border-radius: 10px 10px 0 0;
+    height: 50%;
+  }
 }
 
 .restaurant-details {
@@ -23,6 +27,9 @@
     &-main {
       width: fit-content;
       font-size: 3.5rem;
+      @include respond(tab-port) {
+        font-size: 2.5rem;
+      }
       transition: all 0.5s ease;
       &:hover {
         transform: scale(1.01);
@@ -54,8 +61,7 @@
       overflow: scroll;
       display: flex;
       width: 90%;
-
-      margin: 1rem 0;
+      padding: 1rem 0;
       &__header {
         font-weight: 700;
         font-size: 1.6rem;
@@ -91,7 +97,7 @@
 }
 
 .left {
-  flex: 0 0 70%;
+  flex: 0 1 70%;
 }
 
 .right {
@@ -100,10 +106,14 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-around;
+  @include respond(tab-port) {
+    justify-content: center;
+  }
 }
 
 .report-problem {
   cursor: pointer;
+  text-align: center;
   transition: all 1s ease;
   // &:hover {
   //   transform: scale(1.1);
