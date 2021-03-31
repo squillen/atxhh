@@ -41,5 +41,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-use-before-define': 'off',
     'react/button-has-type': 'off',
+    'import/no-webpack-loader-syntax': 'off',
+    'import/no-unresolved': 'off',
   },
 };

@@ -7,10 +7,13 @@ import ReactMapGL, {
   ScaleControl,
   GeolocateControl,
 } from 'react-map-gl';
+import mapboxgl from 'mapbox-gl';
 import Pins from './Pins';
 import PopupInfo from './PopupInfo';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useWindowListeners } from '../hooks/helpers';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 const geolocateStyle = {
   top: 0,
