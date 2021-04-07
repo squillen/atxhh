@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
-export function useWindowListeners(event, func) {
+export function useListener(event, func, listenOn) {
   useEffect(() => {
-    window.addEventListener(event, func);
+    func();
+    const listenedOn = listenOn === 'window' ? window : document;
+    listenedOn.addEventListener(event, func);
     return () => {
-      window.removeEventListener(event, func);
+      listenedOn.removeEventListener(event, func);
     };
   }, []);
 }

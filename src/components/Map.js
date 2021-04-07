@@ -11,7 +11,7 @@ import mapboxgl from 'mapbox-gl';
 import Pins from './Pins';
 import PopupInfo from './PopupInfo';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useWindowListeners } from '../hooks/helpers';
+import { useListener } from '../hooks/helpers';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
@@ -67,11 +67,12 @@ function Map({ data, onClick, selectedRestaurant }) {
   useEffect(() => {
     if (selectedRestaurant) setShowPopup(true);
   }, [selectedRestaurant]);
+  
   function handleResize() {
     const isMobile = mobileCheck;
     setIsDesktop(!isMobile);
   }
-  useWindowListeners('resize', handleResize);
+  useListener('resize', handleResize, 'window');
   return (
     <ReactMapGL
       {...viewport}
