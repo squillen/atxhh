@@ -34,6 +34,7 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'no-plusplus': 'off',
     'no-nested-ternary': 'off',
+    'react/jsx-one-expression-per-line': 'off',
     'no-unused-vars': 'off',
     'no-shadow': 'off',
     'react/jsx-curly-newline': 'off',

@@ -1,0 +1,14 @@
+.layout-container {
+  padding: 5rem 8rem;
+  a:hover {
+    text-decoration: none;
+  }
+  @include respond(tab-port) {
+    padding: 2rem;
+  }
+}
+
+.main-container {
+  width: 100%;
+  min-height: 80vh;
+}

@@ -1,6 +1,10 @@
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 
+// COMPONENTS
+import Header from './Header';
+import Footer from './Footer';
+
 export default function Layout({ children, metaDescription }) {
   return (
     <div className='layout-container'>
@@ -8,7 +12,9 @@ export default function Layout({ children, metaDescription }) {
         <meta charSet='utf-8' />
         <meta name='description' content={metaDescription} />
       </Helmet>
-      {children}
+      <Header />
+      <main className='main-container'>{children}</main>
+      <Footer />
     </div>
   );
 }

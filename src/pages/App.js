@@ -1,19 +1,17 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
+
+// PAGES
 import Home from './Home';
 import About from './About';
 
 function App() {
   return (
     <div className='App'>
-      <Header />
-      <main className='main-container'>
-        <Switch>
-          <Route exact path='/' component={Home} />
+      <Switch>
+        <Route exact path='/' component={Home} />
         <Route path='/about' component={About} />
-        </Switch>
-      </main>
-      <Footer />
+      </Switch>
     </div>
   );
 }

@@ -3,10 +3,12 @@
 
 // BASE
 @import 'base/base';
+@import 'base/layout';
 
 // PAGES
 @import 'pages/app';
 @import 'pages/home';
+@import 'pages/about';
 
 // COMPONENTS
 @import 'components/button';
