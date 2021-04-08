@@ -4,11 +4,12 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.9",
-    "@prisma/client": "2.16.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "bson": "^4.3.0",
     "graphql": "^15.5.0",
+    "graphql-tag": "^2.12.1",
     "mapbox-gl": "^2.2.0",
     "node-sass": "^5.0.0",
     "prop-types": "^15.7.2",
@@ -19,6 +20,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "realm-web": "^1.2.1",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.3",
     "workbox-broadcast-update": "^5.1.3",
@@ -34,7 +36,6 @@
     "workbox-streams": "^5.1.3"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.16.1",
     "eslint": "^7.20.0",
     "eslint-config": "^0.3.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -45,7 +46,6 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "2.2.1",
-    "prisma": "2.16.1",
     "worker-loader": "^3.0.8"
   },
   "scripts": {

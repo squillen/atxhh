@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@apollo/client';
-import { RESTAURANTS_QUERY } from '../utils/graphql/queries';
+import useRestaurants from '../graphql/useRestaurants';
 
 // COMPONENTS
 import Loading from '../components/Loading';
@@ -14,13 +13,12 @@ import Layout from '../components/Layout';
 export default function Home() {
   const [updatedResults, setUpdatedResults] = useState([]);
   const [showSelections, setShowSelections] = useState(false);
-  const { data = {}, error, loading } = useQuery(RESTAURANTS_QUERY);
+  const { restaurants, error, loading } = useRestaurants();
 
   if (error) return <Error error={error} label='error!' />;
   if (loading) return <Loading>getting restaurants...</Loading>;
 
-  const originalRestaurants =
-    (data.restaurants && data.restaurants.results) || [];
+  const originalRestaurants = restaurants || [];
   const restaurantData = updatedResults || originalRestaurants;
 
   return (

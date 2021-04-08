@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
-import { RESTAURANTS_QUERY } from '../utils/graphql/queries';
+import useRestaurants from '../graphql/useRestaurants';
 
 // COMPONENTS
 import Toggle from './Toggle';
@@ -16,7 +16,7 @@ const initialState = {
     ['food', true],
     ['drinks', true],
   ],
-  prices: [
+  price: [
     ['All', true],
     ['$', true],
     ['$$', true],
@@ -33,7 +33,7 @@ const initialState = {
     ['Friday', todaysDay === 5],
     ['Saturday', todaysDay === 6],
   ],
-  cuisines: [['All', true]],
+  cuisine: [['All', true]],
 };
 
 export default function UserSelections({
@@ -46,10 +46,7 @@ export default function UserSelections({
   const [atTop, setAtTop] = useState(false);
   const [search, setSearch] = useState({});
   const [userSelections, setUserSelections] = useState(initialState);
-  const { data, refetch } = useQuery(RESTAURANTS_QUERY, {
-    variables: search,
-  });
-
+  const { restaurants, refetch } = useRestaurants(search);
   function checkIfAtTop() {
     const isTop = window.scrollY > 150;
     setAtTop(isTop);
@@ -57,10 +54,8 @@ export default function UserSelections({
   useListener('scroll', checkIfAtTop, 'window');
 
   useEffect(() => {
-    if (data && data.restaurants) {
-      handleUpdate(data.restaurants.results);
-    }
-  }, [data]);
+    handleUpdate(restaurants);
+  }, [restaurants]);
 
   useEffect(() => {
     refetch();
@@ -68,7 +63,7 @@ export default function UserSelections({
 
   // set all restaurant cuisines
   useEffect(() => {
-    if (originalData.length && userSelections.cuisines.length <= 1) {
+    if (originalData.length && userSelections.cuisine.length <= 1) {
       const cuisinesIncluded = {};
       const newCuisines = originalData.reduce((arr, el) => {
         const arrCopy = [...arr];
@@ -83,7 +78,7 @@ export default function UserSelections({
       }, []);
       setUserSelections({
         ...userSelections,
-        cuisines: [...userSelections.cuisines, ...newCuisines],
+        cuisine: [...userSelections.cuisine, ...newCuisines],
       });
     }
   }, [originalData]);
@@ -105,12 +100,10 @@ export default function UserSelections({
         userSelections.selectedDays,
         (el, index) => index.toString(),
       ),
-      prices: searchIfSelected(userSelections.prices, (price) =>
+      price: searchIfSelected(userSelections.price, (price) =>
         price.length.toString(),
       ),
-      cuisines: searchIfSelected(userSelections.cuisines, (el) =>
-        el.toString(),
-      ),
+      cuisine: searchIfSelected(userSelections.cuisine, (el) => el.toString()),
       whatToGoFor: searchIfSelected(userSelections.whatToGoFor, (el) =>
         el.toString().toUpperCase(),
       ),
@@ -120,8 +113,9 @@ export default function UserSelections({
 
   // helpers
   const updateUserSelectionTupleValue = (key, idx, value) => {
-    const newArr = [...userSelections[key]];
-    const display = newArr[idx][0];
+    const selection = userSelections[key] ?? [[]];
+    const newArr = [...selection];
+    const display = newArr[idx][0] || '';
     if (display.toString().toLowerCase() === 'all') {
       newArr.forEach((el) => {
         el[1] = value;
@@ -134,7 +128,6 @@ export default function UserSelections({
       [key]: newArr,
     });
   };
-  // 'user-selections__form'
 
   return (
     <div className='selections-container'>
@@ -178,20 +171,20 @@ export default function UserSelections({
             <div className='selection'>
               <h4 className='selection--header'>Cost:</h4>
               <div className='selection--checkboxes'>
-                {userSelections.prices.map(([display, currentBool], idx) => (
+                {userSelections.price.map(([display, currentBool], idx) => (
                   <div key={display} className='selection--checkbox'>
                     <Checkbox
                       labelRight
                       key={display}
                       onChange={() =>
                         updateUserSelectionTupleValue(
-                          'prices',
+                          'price',
                           idx,
                           !currentBool,
                         )
                       }
                       display={display}
-                      checked={userSelections.prices[idx][1]}
+                      checked={userSelections.price[idx][1]}
                     />
                   </div>
                 ))}
@@ -225,19 +218,19 @@ export default function UserSelections({
                 active={activeDropdown}
                 setActive={setActiveDropdown}
               >
-                {userSelections.cuisines.map(([cuisine, currentBool], idx) => (
+                {userSelections.cuisine.map(([cuisine, currentBool], idx) => (
                   <Checkbox
                     labelRight
                     key={cuisine}
                     onChange={() =>
                       updateUserSelectionTupleValue(
-                        'cuisines',
+                        'cuisine',
                         idx,
                         !currentBool,
                       )
                     }
                     display={cuisine.split('_').join(' ')}
-                    checked={userSelections.cuisines[idx][1]}
+                    checked={userSelections.cuisine[idx][1]}
                   />
                 ))}
               </Dropdown>

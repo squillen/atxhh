@@ -1,0 +1,111 @@
+{
+  "title": "restaurant",
+  "properties": {
+    "_id": {
+      "bsonType": "objectId"
+    },
+    "address": {
+      "bsonType": "string"
+    },
+    "coordinates": {
+      "bsonType": "object",
+      "properties": {
+        "lat": {
+          "bsonType": "decimal"
+        },
+        "lng": {
+          "bsonType": "decimal"
+        }
+      }
+    },
+    "cuisine": {
+      "bsonType": "array",
+      "items": {
+        "bsonType": "string",
+        "enum": [
+          "JAPANESE",
+          "AMERICAN",
+          "CHINESE",
+          "INDIAN",
+          "MEXICAN",
+          "ITALIAN",
+          "STEAK_HOUSE",
+          "ASIAN",
+          "SOUTHERN",
+          "SEAFOOD"
+        ]
+      }
+    },
+    "description": {
+      "bsonType": "string"
+    },
+    "endTime": {
+      "bsonType": "string"
+    },
+    "happyHourDays": {
+      "bsonType": "array",
+      "items": {
+        "bsonType": "string"
+      }
+    },
+    "menu": {
+      "bsonType": "string"
+    },
+    "name": {
+      "bsonType": "string"
+    },
+    "percentOffDrinks": {
+      "bsonType": "decimal"
+    },
+    "percentOffFood": {
+      "bsonType": "decimal"
+    },
+    "price": {
+      "bsonType": "string"
+    },
+    "rating": {
+      "enum": [
+        "ONE",
+        "TWO",
+        "THREE",
+        "FOUR",
+        "FIVE",
+        "SIX",
+        "SEVEN",
+        "EIGHT",
+        "NINE",
+        "TEN"
+      ]
+    },
+    "startTime": {
+      "bsonType": "string"
+    },
+    "url": {
+      "bsonType": "string"
+    },
+    "warnings": {
+      "bsonType": "object",
+      "properties": {
+        "BROKEN_LINK": {
+          "bsonType": "int"
+        },
+        "NO_LONGER_ACTIVE": {
+          "bsonType": "int"
+        },
+        "WRONG_TIMES": {
+          "bsonType": "int"
+        }
+      }
+    },
+    "whatToGoFor": {
+      "bsonType": "array",
+      "items": {
+        "bsonType": "string",
+        "enum": ["DRINKS", "FOOD"]
+      }
+    },
+    "when": {
+      "bsonType": "string"
+    }
+  }
+}
