@@ -82,13 +82,15 @@ export default function RestaurantDetails({ restaurant }) {
           </div>
         </div>
         <div className='restaurant-details__info'>
-          <div className='detail'>
-            <div className='detail__header'>When: </div>
-            <div className='detail__text'>{when}</div>
-          </div>
-          <div className='detail'>
-            <div className='detail__header'>What: </div>
-            <div className='detail__description'>{description}</div>
+          <div className="description-container">
+            <div className='detail'>
+              <div className='detail__header'>When: </div>
+              <div className='detail__text'>{when}</div>
+            </div>
+            <div className='detail'>
+              <div className='detail__header'>What: </div>
+              <div className='detail__description'>{description}</div>
+            </div>
           </div>
           {menu && (
             <div className='menu'>

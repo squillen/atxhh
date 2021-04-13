@@ -47,10 +47,9 @@
   &__info {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     font-size: 1.2rem;
-    overflow: scroll;
-    min-height: 60%;
+    flex: 0 0 70%;
     // padding: 1rem 0;
     .menu {
       a {
