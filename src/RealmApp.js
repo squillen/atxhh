@@ -3,7 +3,6 @@ import * as Realm from 'realm-web';
 import PropTypes from 'prop-types';
 
 const RealmAppContext = createContext();
-const REALM_API_KEY = process.env.REACT_APP_REALM_API_KEY;
 
 export const useRealmApp = () => {
   const app = useContext(RealmAppContext);

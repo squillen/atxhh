@@ -9,7 +9,7 @@ const SIZE = 25;
 function Pins({ data, onClick, onHover }) {
   return data.map((restaurant) => (
     <Marker
-      key={`marker-${restaurant.id}`}
+      key={`marker-${restaurant._id}`}
       longitude={+restaurant.coordinates.lng}
       latitude={+restaurant.coordinates.lat}
     >

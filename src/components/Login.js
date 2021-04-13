@@ -29,7 +29,7 @@ export default function Login({ showLogin, handleClose }) {
 
   const handleCompleted = (userObj) => {
     setAuth(userObj.token);
-    setUserIDInLocalStorage(userObj.user.id);
+    setUserIDInLocalStorage(userObj.user._id);
     // useAuthentication(userObj.id, true);
     setSuccess(true);
     history.push('/');

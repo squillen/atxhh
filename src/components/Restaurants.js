@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import RestaurantDetails from './RestaurantDetails';
 
-export default function RestaurantsContainer({ data }) {
+export default function RestaurantsContainer({ restaurantData }) {
   return (
     <div className='restaurants-container'>
       <h2 className='restaurants-container__header'>
-        {`${data.length} Restaurants:`}
+        {`${restaurantData.length} Restaurants:`}
       </h2>
       <div className='restaurants-container__restaurants'>
-        {data.map((restaurant) => (
-          <div key={restaurant.id} className='restaurant'>
+        {restaurantData.map((restaurant) => (
+          <div key={restaurant._id} className='restaurant'>
             <div
               className='restaurant-image-div'
               onClick={() => window.open(restaurant.url, '_blank')}
@@ -27,5 +27,5 @@ export default function RestaurantsContainer({ data }) {
 }
 
 RestaurantsContainer.propTypes = {
-  data: PropTypes.array.isRequired,
+  restaurantData: PropTypes.array.isRequired,
 };

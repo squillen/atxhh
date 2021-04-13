@@ -8,7 +8,7 @@ import { displayCuisines, handleRating } from '../utils/helpers';
 export default function RestaurantDetails({ restaurant }) {
   const [showProblemModal, setShowProblemModal] = useState(false);
   const {
-    id,
+    _id,
     menu,
     rating,
     description,
@@ -104,7 +104,7 @@ export default function RestaurantDetails({ restaurant }) {
         handleClose={() => setShowProblemModal(false)}
       >
         <ReportProblems
-          restaurantID={id}
+          restaurantID={_id}
           warnings={warnings}
           handleClose={() => setShowProblemModal(false)}
         />

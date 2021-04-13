@@ -1,12 +1,10 @@
 import React from 'react';
-import * as Realm from 'realm-web';
 import { BrowserRouter } from 'react-router-dom';
 import { Switch, Route } from 'react-router';
-import PropTypes from 'prop-types';
 
 // REALM
 import RealmApolloProvider from './graphql/RealmApolloProvider';
-import { useRealmApp, RealmAppProvider } from './RealmApp';
+import { RealmAppProvider } from './RealmApp';
 
 // PAGES
 import Home from './pages/Home';

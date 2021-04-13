@@ -1,43 +1,51 @@
-import { useState } from 'react';
-import useRestaurants from '../graphql/useRestaurants';
+import { useState, useEffect } from 'react';
+import { useRestaurants } from '../graphql/useRestaurants';
 
 // COMPONENTS
 import Loading from '../components/Loading';
 import Error from '../components/Error';
-
 import UserSelections from '../components/UserSelections';
 import MapWithRestaurant from '../components/MapWithRestaurant';
 import RestaurantsContainer from '../components/Restaurants';
 import Layout from '../components/Layout';
 
 export default function Home() {
-  const [updatedResults, setUpdatedResults] = useState([]);
+  // STATE
+  const [userSearchQuery, setUserSearchQuery] = useState({});
   const [showSelections, setShowSelections] = useState(false);
-  const { restaurants, error, loading } = useRestaurants();
+  const [originalRestaurants, setOriginalRestaurants] = useState([]);
+  const { restaurants, error, loading } = useRestaurants({
+    AND: userSearchQuery,
+  });
 
+  // EFFECTS
+  useEffect(() => {
+    if (restaurants && !originalRestaurants.length)
+      setOriginalRestaurants(restaurants);
+  }, [restaurants]);
+
+  // RETURNS
   if (error) return <Error error={error} label='error!' />;
-  if (loading) return <Loading>getting restaurants...</Loading>;
-
-  const originalRestaurants = restaurants || [];
-  const restaurantData = updatedResults || originalRestaurants;
+  if (loading && !originalRestaurants.length)
+    return <Loading>getting restaurants...</Loading>;
 
   return (
     <Layout>
       <div className='home-container'>
         <UserSelections
-          originalData={originalRestaurants}
+          originalRestaurants={originalRestaurants}
           showSelections={showSelections}
-          handleUpdate={setUpdatedResults}
+          handleSearchUpdate={setUserSearchQuery}
           setShowSelections={setShowSelections}
         />
-        {restaurantData.length ? (
+        {restaurants.length ? (
           <div
             className='restaurants-section'
             onClick={showSelections ? () => setShowSelections(false) : null}
           >
             <div className='restaurant-detail'>
-              <MapWithRestaurant restaurantData={restaurantData} />
-              <RestaurantsContainer data={restaurantData} />
+              <MapWithRestaurant restaurantData={restaurants} />
+              <RestaurantsContainer restaurantData={restaurants} />
             </div>
           </div>
         ) : (

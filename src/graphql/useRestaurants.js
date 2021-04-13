@@ -2,8 +2,10 @@ import { ObjectId } from 'bson';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
-const useRestaurants = (userQuery) => {
-  const { restaurants, loading, error, refetch } = useAllRestaurants(userQuery);
+export const useRestaurants = (userQuery) => {
+  const { restaurants, loading, error, refetch } = findRestaurants(
+    userQuery,
+  );
   return {
     loading,
     restaurants,
@@ -11,9 +13,8 @@ const useRestaurants = (userQuery) => {
     refetch,
   };
 };
-export default useRestaurants;
 
-function useAllRestaurants(userQuery) {
+function findRestaurants(query) {
   const { data, loading, error, refetch } = useQuery(
     gql`
       query GetRestaurants($query: RestaurantQueryInput) {
@@ -48,7 +49,7 @@ function useAllRestaurants(userQuery) {
         }
       }
     `,
-    { variables: userQuery },
+    { variables: { query } },
   );
   if (error) {
     console.error(`Failed to fetch restaurants: ${error.message}`);

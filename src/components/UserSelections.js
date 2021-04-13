@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
-import useRestaurants from '../graphql/useRestaurants';
 
 // COMPONENTS
 import Toggle from './Toggle';
@@ -39,33 +37,35 @@ const initialState = {
 export default function UserSelections({
   showSelections,
   setShowSelections,
-  originalData,
-  handleUpdate,
+  originalRestaurants,
+  handleSearchUpdate,
 }) {
+  if (!originalRestaurants.length) return null;
   const [activeDropdown, setActiveDropdown] = useState('');
   const [atTop, setAtTop] = useState(false);
-  const [search, setSearch] = useState({});
   const [userSelections, setUserSelections] = useState(initialState);
-  const { restaurants, refetch } = useRestaurants(search);
+  const [search, setSearch] = useState({});
+
+  // WINDOW LISTENER
   function checkIfAtTop() {
     const isTop = window.scrollY > 150;
     setAtTop(isTop);
   }
   useListener('scroll', checkIfAtTop, 'window');
 
+  // /// EFFECTS /////
+  // update restaurant results in Home
   useEffect(() => {
-    handleUpdate(restaurants);
-  }, [restaurants]);
-
-  useEffect(() => {
-    refetch();
+    if (Object.keys(search).length) {
+      handleSearchUpdate(search);
+    }
   }, [search]);
 
-  // set all restaurant cuisines
+  // set restaurant cuisines on data
   useEffect(() => {
-    if (originalData.length && userSelections.cuisine.length <= 1) {
+    if (originalRestaurants.length && userSelections.cuisine.length <= 1) {
       const cuisinesIncluded = {};
-      const newCuisines = originalData.reduce((arr, el) => {
+      const newCuisines = originalRestaurants.reduce((arr, el) => {
         const arrCopy = [...arr];
         el.cuisine.forEach((cuisine) => {
           if (!cuisinesIncluded[cuisine]) {
@@ -81,8 +81,9 @@ export default function UserSelections({
         cuisine: [...userSelections.cuisine, ...newCuisines],
       });
     }
-  }, [originalData]);
+  }, [originalRestaurants, userSelections.cuisine]);
 
+  // update search object
   useEffect(() => {
     const searchIfSelected = (array, cb) => {
       let formattedArray = [...array];
@@ -96,15 +97,17 @@ export default function UserSelections({
     };
 
     const query = {
-      happyHourDays: searchIfSelected(
+      happyHourDays_in: searchIfSelected(
         userSelections.selectedDays,
         (el, index) => index.toString(),
       ),
-      price: searchIfSelected(userSelections.price, (price) =>
+      price_in: searchIfSelected(userSelections.price, (price) =>
         price.length.toString(),
       ),
-      cuisine: searchIfSelected(userSelections.cuisine, (el) => el.toString()),
-      whatToGoFor: searchIfSelected(userSelections.whatToGoFor, (el) =>
+      cuisine_in: searchIfSelected(userSelections.cuisine, (el) =>
+        el.toString(),
+      ),
+      whatToGoFor_in: searchIfSelected(userSelections.whatToGoFor, (el) =>
         el.toString().toUpperCase(),
       ),
     };
@@ -243,8 +246,8 @@ export default function UserSelections({
 }
 
 UserSelections.propTypes = {
-  originalData: PropTypes.array.isRequired,
-  handleUpdate: PropTypes.func.isRequired,
+  originalRestaurants: PropTypes.array.isRequired,
+  handleSearchUpdate: PropTypes.func.isRequired,
   showSelections: PropTypes.bool.isRequired,
   setShowSelections: PropTypes.func.isRequired,
 };
