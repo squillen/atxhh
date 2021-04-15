@@ -27,7 +27,11 @@ export default function Home() {
   // RETURNS
   if (error) return <Error error={error} label='error!' />;
   if (loading && !originalRestaurants.length)
-    return <Loading>getting restaurants...</Loading>;
+    return (
+      <Layout>
+        <Loading>getting restaurants...</Loading>
+      </Layout>
+    );
   return (
     <Layout>
       <div className='home-container'>

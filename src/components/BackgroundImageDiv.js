@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import LazyLoad from 'react-lazyload';
 import PropTypes from 'prop-types';
+import Loading from './Loading';
 
 export default function BackgroundImageDiv({ images, styles }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,8 +20,10 @@ export default function BackgroundImageDiv({ images, styles }) {
       <LazyLoad
         height='100%'
         once
-        style={{ height: '100%', color: 'black' }}
-        placeholder={<div className='loading'>loading...</div>}
+        style={{
+          height: '100%',
+        }}
+        placeholder={<Loading />}
       >
         <div
           className='background-image--image'
@@ -29,7 +32,7 @@ export default function BackgroundImageDiv({ images, styles }) {
             ...styles,
           }}
         >
-          {noOfImages >= 1 && (
+          {noOfImages > 1 && (
             <>
               <div className='image-toggle-container' onClick={handleClick(-1)}>
                 <img
