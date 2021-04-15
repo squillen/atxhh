@@ -5,7 +5,7 @@ import { displayCuisines, handleRating } from '../utils/helpers';
 function PopupInfo({ selectedRestaurant }) {
   return (
     <div className='restaurant-info__container'>
-      <div className='header'>{selectedRestaurant.name}</div>
+      <div className='popup-header'>{selectedRestaurant.name}</div>
       <div className='info'>{displayCuisines(selectedRestaurant.cuisine)}</div>
       <div className='info'>
         <span>{handleRating(selectedRestaurant.rating)}</span>

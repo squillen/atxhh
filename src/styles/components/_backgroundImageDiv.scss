@@ -26,9 +26,9 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  // @include respond(tab-port) {
-  //   height: 30rem;
-  // }
+  @include respond(tab-port) {
+    height: 30rem;
+  }
 }
 
 .image-toggle-container {
