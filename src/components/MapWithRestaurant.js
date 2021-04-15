@@ -26,9 +26,9 @@ export default function MapWithRestaurant({ restaurantData }) {
       <div className='right-side'>
         {selectedRestaurant ? (
           <div className='hero-container'>
-            <div className='hero-container--image'>
+            {/* <div className='hero-container--image'>
               <BackgroundImageDiv images={selectedRestaurant.images} />
-            </div>
+            </div> */}
             <RestaurantDetails restaurant={selectedRestaurant} />
           </div>
         ) : (

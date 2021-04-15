@@ -6,9 +6,11 @@
 }
 
 .right-side {
-  // width: inherit;
-  // height: inherit;
-  // padding: 2rem;
+  width: inherit;
+  height: inherit;
+  max-height: 80vh;
+  background: whitesmoke;
+  overflow: scroll;
 }
 
 .restaurant-image {
@@ -23,7 +25,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: whitesmoke;
 
   &--image {
     height: 100%;
