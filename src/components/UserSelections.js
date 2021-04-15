@@ -31,6 +31,7 @@ const initialState = {
     ['Friday', todaysDay === 5],
     ['Saturday', todaysDay === 6],
   ],
+  times: ['24:00', '00:00'],
   cuisine: [['All', true]],
 };
 
@@ -42,6 +43,7 @@ export default function UserSelections({
 }) {
   if (!originalRestaurants.length) return null;
   const [activeDropdown, setActiveDropdown] = useState('');
+  const [happeningNow, setHappeningNow] = useState(true);
   const [atTop, setAtTop] = useState(false);
   const [userSelections, setUserSelections] = useState(initialState);
   const [search, setSearch] = useState({});
@@ -56,10 +58,29 @@ export default function UserSelections({
   // /// EFFECTS /////
   // update restaurant results in Home
   useEffect(() => {
-    if (Object.keys(search).length) {
-      handleSearchUpdate(search);
-    }
+    handleSearchUpdate(search);
   }, [search]);
+
+  useEffect(() => {
+    let times = ['24:00', '00:00'];
+    const { selectedDays } = userSelections;
+    let newSelectedDays = [...selectedDays];
+    if (happeningNow) {
+      const [hour, min] = new Date().toTimeString().split(' ')[0].split(':');
+      const timeNow = `${hour}:${min}`;
+      times = [timeNow, timeNow];
+      newSelectedDays = selectedDays.map((tuple, idx) => {
+        if (idx + 1 === todaysDay) tuple[1] = true;
+        else tuple[1] = false;
+        return tuple;
+      });
+    }
+    setUserSelections({
+      ...userSelections,
+      times,
+      selectedDays: newSelectedDays,
+    });
+  }, [happeningNow]);
 
   // set restaurant cuisines on data
   useEffect(() => {
@@ -110,6 +131,8 @@ export default function UserSelections({
       whatToGoFor_in: searchIfSelected(userSelections.whatToGoFor, (el) =>
         el.toString().toUpperCase(),
       ),
+      startTime_lte: userSelections.times[0],
+      endTime_gte: userSelections.times[1],
     };
     setSearch(query);
   }, [userSelections]);
@@ -118,6 +141,7 @@ export default function UserSelections({
   const updateUserSelectionTupleValue = (key, idx, value) => {
     const selection = userSelections[key] ?? [[]];
     const newArr = [...selection];
+    if (key === 'selectedDays' && newArr[idx] !== todaysDay + 1) setHappeningNow(false) 
     const display = newArr[idx][0] || '';
     if (display.toString().toLowerCase() === 'all') {
       newArr.forEach((el) => {
@@ -169,6 +193,14 @@ export default function UserSelections({
                 checked={userSelections.whatToGoFor[idx][1]}
               />
             ))}
+          </div>
+          <div className='checkbox__selections'>
+            <h3 className='checkbox__selections--header'>Happening now:</h3>
+            <Checkbox
+              labelRight
+              onChange={() => setHappeningNow(!happeningNow)}
+              checked={happeningNow}
+            />
           </div>
           <div className='dropdowns'>
             <div className='selection'>
