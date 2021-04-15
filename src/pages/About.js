@@ -18,7 +18,7 @@ export default function AboutPage() {
           of restaurants to go to during those happiest of hours.
         </p>
         <p>
-          There are several great sites out there, like{' '}
+          There are several great Austin happy hour sites out there, like{' '}
           <span>
             <a
               target='_blank'

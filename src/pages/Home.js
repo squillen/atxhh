@@ -6,7 +6,7 @@ import Loading from '../components/Loading';
 import Error from '../components/Error';
 import UserSelections from '../components/UserSelections';
 import MapWithRestaurant from '../components/MapWithRestaurant';
-import RestaurantsContainer from '../components/Restaurants';
+import RestaurantsContainer from '../components/RestaurantsContainer';
 import Layout from '../components/Layout';
 
 export default function Home() {
@@ -28,7 +28,6 @@ export default function Home() {
   if (error) return <Error error={error} label='error!' />;
   if (loading && !originalRestaurants.length)
     return <Loading>getting restaurants...</Loading>;
-
   return (
     <Layout>
       <div className='home-container'>
@@ -38,15 +37,13 @@ export default function Home() {
           handleSearchUpdate={setUserSearchQuery}
           setShowSelections={setShowSelections}
         />
-        {restaurants.length ? (
+        {restaurants ? (
           <div
             className='restaurants-section'
             onClick={showSelections ? () => setShowSelections(false) : null}
           >
-            <div className='restaurant-detail'>
-              <MapWithRestaurant restaurantData={restaurants} />
-              <RestaurantsContainer restaurantData={restaurants} />
-            </div>
+            <MapWithRestaurant restaurantData={restaurants} />
+            <RestaurantsContainer restaurantData={restaurants} />
           </div>
         ) : (
           <div className='no-restaurants'>

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { displayCuisines } from '../utils/helpers';
+import BackgroundImageDiv from './BackgroundImageDiv';
 
 export default function Restaurant({ restaurant }) {
   const {
@@ -8,8 +9,8 @@ export default function Restaurant({ restaurant }) {
     cuisine,
     url,
     name,
-    id,
-    image,
+    images = [],
+    _id,
     price,
   } = restaurant;
   const dollarSignsDisplay = [];
@@ -18,19 +19,14 @@ export default function Restaurant({ restaurant }) {
       dollarSignsDisplay.push(<span className='dollar-sign'>$</span>);
     else dollarSignsDisplay.push(<span className='dollar-sign--green'>$</span>);
   }
+
   return (
-    <div className='restaurant-container'>
+    <div id={`restaurant-container-${_id}`} className='restaurant-container'>
       <div className='hero-container__header'>
         {/* <div className="hero-container__header--text">
           <h3 className="hero-container__header--text--main">{name}</h3>
         </div> */}
-        <div
-          className='hero-container__header--image'
-          style={{
-            background: `url(${image}) center no-repeat`,
-            backgroundSize: 'cover',
-          }}
-        />
+        <BackgroundImageDiv images={images} />
       </div>
       <div className='hero-container__body'>
         <div className='hero-container__body--header'>

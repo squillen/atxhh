@@ -4,11 +4,11 @@ import RestaurantDetails from './RestaurantDetails';
 import BackgroundImageDiv from './BackgroundImageDiv';
 
 function RestaurantHero({ restaurant }) {
-  const { id, image } = restaurant;
+  const { id, images } = restaurant;
   return (
     <div id={id} className='hero-container'>
       <div className='hero-container--image'>
-        <BackgroundImageDiv image={image} />
+        <BackgroundImageDiv images={images} />
       </div>
       <RestaurantDetails restaurant={restaurant} />
     </div>

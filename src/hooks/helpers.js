@@ -35,7 +35,7 @@ export function useAPI(fn) {
             error: e.message || 'useAPI request error',
           });
         } finally {
-          setState({ loading: false })
+          setState({ loading: false });
         }
       }
     };
@@ -43,7 +43,7 @@ export function useAPI(fn) {
     makeAsyncCall();
 
     return () => {
-      setAPIState({ result: null, error: '', loading: false})
+      setAPIState({ result: null, error: '', loading: false });
       mounted = false;
     };
   }, [fn]);

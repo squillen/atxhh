@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Map from './Map';
 import RestaurantDetails from './RestaurantDetails';
+import BackgroundImageDiv from './BackgroundImageDiv';
 
 export default function MapWithRestaurant({ restaurantData }) {
   if (!restaurantData || !restaurantData.length) return null;
@@ -25,14 +26,9 @@ export default function MapWithRestaurant({ restaurantData }) {
       <div className='right-side'>
         {selectedRestaurant ? (
           <div className='hero-container'>
-            <div
-              onClick={() => window.open(selectedRestaurant.url, '_blank')}
-              className='image-div'
-              style={{
-                background: `url(${selectedRestaurant.image}) center no-repeat`,
-                backgroundSize: 'cover',
-              }}
-            />
+            <div className='hero-container--image'>
+              <BackgroundImageDiv images={selectedRestaurant.images} />
+            </div>
             <RestaurantDetails restaurant={selectedRestaurant} />
           </div>
         ) : (

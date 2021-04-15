@@ -81,7 +81,12 @@ export default function ReportProblems({
       <div className='problems-container__header'>
         <div className='header-image'>
           <BackgroundImageDiv
-            image='./images/shiitake.jpg'
+            images={[
+              {
+                img:
+                  'https://atxhh.s3-us-west-2.amazonaws.com/images/shiitake.jpg',
+              },
+            ]}
             styles={{ borderRadius: '1rem' }}
           />
         </div>

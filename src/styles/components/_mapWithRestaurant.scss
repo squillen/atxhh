@@ -1,0 +1,34 @@
+.map-section {
+  display: flex;
+  @include respond(tab-port) {
+    flex-direction: column;
+  }
+}
+
+.right-side {
+  // width: inherit;
+  // height: inherit;
+  // padding: 2rem;
+}
+
+.restaurant-image {
+  flex: 0 0 33.33%;
+  width: 30rem;
+}
+
+.hero-container {
+  color: black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: whitesmoke;
+
+  &--image {
+    height: 100%;
+    @include respond(tab-port) {
+      display: none;
+    }
+  }
+}

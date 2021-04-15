@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import Badge from './Badge';
 import Modal from './Modal';
 import ReportProblems from './ReportProblems';
-import { displayCuisines, handleRating } from '../utils/helpers';
+import { displayCuisines } from '../utils/helpers';
+import RatingBadge from './RatingBadge';
 
 export default function RestaurantDetails({ restaurant }) {
   const [showProblemModal, setShowProblemModal] = useState(false);
@@ -35,23 +35,12 @@ export default function RestaurantDetails({ restaurant }) {
         </span>,
       );
   }
-  const badgeLabel = rating ? (
-    rating === 'NA' ? (
-      <span className='na-rating'>unrated</span>
-    ) : (
-      <span>
-        <span className='rating'>{handleRating(rating)}</span>
-        <span>
-          <sub>/10</sub>
-        </span>
-      </span>
-    )
-  ) : null;
+
   return (
     <div className='restaurant-details-container'>
       <div className='restaurant-details'>
         <div className='restaurant-details__header'>
-          <div className='left'>
+          <div className='restaurant-details__header--left'>
             <h3 className='restaurant-details__header-main'>
               <a target={`${name}-site`} rel='noreferrer' href={url}>
                 {name}
@@ -71,18 +60,12 @@ export default function RestaurantDetails({ restaurant }) {
               <div className='dollar-signs'>{dollarSignsDisplay}</div>
             </sub>
           </div>
-          <div className='right'>
-            {badgeLabel && <Badge label={badgeLabel} />}
-            <div
-              className='report-problem'
-              onClick={() => setShowProblemModal(true)}
-            >
-              report a problem
-            </div>
+          <div className='restaurant-details__header--right'>
+            <RatingBadge rating={rating} />
           </div>
         </div>
         <div className='restaurant-details__info'>
-          <div className="description-container">
+          <div className='description-container'>
             <div className='detail'>
               <div className='detail__header'>When: </div>
               <div className='detail__text'>{when}</div>
@@ -92,13 +75,21 @@ export default function RestaurantDetails({ restaurant }) {
               <div className='detail__description'>{description}</div>
             </div>
           </div>
-          {menu && (
-            <div className='menu'>
-              <a href={menu} target='_blank' rel='noreferrer'>
-                see menu
-              </a>
+          <div className="links">
+            {menu && (
+              <div className='menu'>
+                <a href={menu} target='_blank' rel='noreferrer'>
+                  see menu
+                </a>
+              </div>
+            )}
+            <div
+              className='report-problem'
+              onClick={() => setShowProblemModal(true)}
+            >
+              report a problem
             </div>
-          )}
+          </div>
         </div>
       </div>
       <Modal

@@ -1,5 +1,33 @@
-.selections-container {
-  transition: all 0.5s;
+.selections {
+  width: 100%;
+  &-container {
+    transition: all 0.5s;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    // width: 60%;
+    margin: 0 auto;
+    z-index: 2;
+    transition: all 0.5s;
+
+    &--white {
+      @extend .selections-container;
+      background: var(--color-transparent-white);
+      color: black;
+      z-index: 3; // over mapbox info
+    }
+  }
+
+  &--hide {
+    visibility: hidden;
+    height: 0;
+  }
+
+  &--show {
+    transition: all 1s ease;
+    visibility: visible;
+    height: auto;
+  }
 }
 
 .user-selections__form {

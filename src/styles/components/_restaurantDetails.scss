@@ -12,17 +12,32 @@
 
 .restaurant-details {
   display: flex;
+  height: 100%;
+  box-sizing: border-box;
   flex-direction: column;
   justify-content: space-around;
   padding: 2rem;
-  height: 100%;
-  overflow: scroll;
+  // height: 100%;
   color: black;
   &__header {
     display: flex;
     justify-content: space-between;
     a {
       color: var(--color-link-blue);
+    }
+    &--left {
+      flex: 0 1 70%;
+    }
+
+    &--right {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-around;
+      @include respond(tab-port) {
+        justify-content: center;
+      }
     }
     &-main {
       width: fit-content;
@@ -95,29 +110,10 @@
   }
 }
 
-.left {
-  flex: 0 1 70%;
-}
-
-.right {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-around;
-  @include respond(tab-port) {
-    justify-content: center;
-  }
-}
-
 .report-problem {
   cursor: pointer;
-  text-align: center;
-  transition: all 1s ease;
-  // &:hover {
-  //   transform: scale(1.1);
-  //   letter-spacing: 1px;
-  // }
+  color: var(--color-link-blue);
+  width: fit-content;
 }
 
 .dollar-sign {

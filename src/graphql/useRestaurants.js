@@ -30,7 +30,10 @@ function findRestaurants(query) {
           description
           endTime
           happyHourDays
-          image
+          images {
+            img
+            title
+          }
           menu
           name
           percentOffDrinks
