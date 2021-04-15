@@ -61,7 +61,7 @@ export default function RestaurantDetails({ restaurant }) {
             </sub>
           </div>
           <div className='restaurant-details__header--right'>
-            <RatingBadge rating={rating} />
+            <RatingBadge rating={rating} name={name} />
           </div>
         </div>
         <div className='restaurant-details__info'>
