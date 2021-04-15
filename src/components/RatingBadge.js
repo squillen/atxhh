@@ -59,4 +59,5 @@ export default function RatingBadge({ name, rating }) {
 
 RatingBadge.propTypes = {
   rating: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
