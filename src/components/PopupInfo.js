@@ -8,7 +8,7 @@ function PopupInfo({ selectedRestaurant }) {
       <div className='popup-header'>{selectedRestaurant.name}</div>
       <div className='info'>{displayCuisines(selectedRestaurant.cuisine)}</div>
       <div className='info'>
-        <span>{handleRating(selectedRestaurant.rating)}</span>
+        <span>Our rating: {handleRating(selectedRestaurant.rating)}</span>
         <span>
           <sub>/10</sub>
         </span>
