@@ -43,7 +43,7 @@ export default function UserSelections({
 }) {
   if (!originalRestaurants.length) return null;
   const [activeDropdown, setActiveDropdown] = useState('');
-  const [happeningNow, setHappeningNow] = useState(true);
+  const [happeningNow, setHappeningNow] = useState(false);
   const [atTop, setAtTop] = useState(false);
   const [userSelections, setUserSelections] = useState(initialState);
   const [search, setSearch] = useState({});
