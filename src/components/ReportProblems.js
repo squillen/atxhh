@@ -40,7 +40,6 @@ export default function ReportProblems({
     return updateUserReportedProblems(restaurantID);
   };
   const handleError = (error) => {
-    console.error('ERROR:::', error);
     setProblems(potentialProblems);
     return setSubmissionError(true);
   };
