@@ -51,9 +51,11 @@ export default function BackgroundImageDiv({ images, styles }) {
             </>
           )}
         </div>
-        <div className='title'>
-          <ReactMarkdown>{images[currentIndex].title}</ReactMarkdown>
-        </div>
+        {images[currentIndex].title && (
+          <div className='title'>
+            <ReactMarkdown>{images[currentIndex].title}</ReactMarkdown>
+          </div>
+        )}
       </LazyLoad>
     </div>
   );
