@@ -16,7 +16,7 @@ const createRealmApolloClient = (app) => {
       if (!app.currentUser) {
         await app.logIn(Realm.Credentials.anonymous());
       }
-      await app?.currentUser?.refreshCustomData();
+      await app.currentUser.refreshCustomData();
       options.headers.Authorization = `Bearer ${app.currentUser._accessToken}`;
       return fetch(uri, options);
     },
