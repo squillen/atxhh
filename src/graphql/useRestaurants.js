@@ -3,9 +3,7 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 export const useRestaurants = (userQuery) => {
-  const { restaurants, loading, error, refetch } = findRestaurants(
-    userQuery,
-  );
+  const { restaurants, loading, error, refetch } = findRestaurants(userQuery);
   return {
     loading,
     restaurants,

@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
 import PropTypes from 'prop-types';
-import { UPDATE_RESTAURANT_MUTATION } from '../utils/graphql/mutations';
 
 // COMPONENTS
 import Checkbox from './Checkbox';
@@ -14,6 +12,7 @@ import {
   updateUserReportedProblems,
 } from '../utils/helpers';
 import BackgroundImageDiv from './BackgroundImageDiv';
+import { useUpdateRestaurant } from '../graphql/useRestaurantMutations';
 
 const potentialProblems = [
   ['Wrong hours/days', false, 'WRONG_TIMES'],
@@ -26,26 +25,27 @@ export default function ReportProblems({
   warnings,
   handleClose,
 }) {
+  // STATE
   const userCanSubmitWarnings = canUserReportRestaurantProblem(restaurantID);
   const [alreadyReportedProblem, setAlreadyReportedProblem] = useState(
     !userCanSubmitWarnings,
   );
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
   const [submissionError, setSubmissionError] = useState(false);
-  const handleCompleted = (id) => {
+  const [problems, setProblems] = useState(potentialProblems);
+
+  const handleCompleted = () => {
     setSubmissionSuccess(true);
-    return updateUserReportedProblems(id);
+    setProblems(potentialProblems);
+    return updateUserReportedProblems(restaurantID);
   };
   const handleError = (error) => {
     console.error('ERROR:::', error);
+    setProblems(potentialProblems);
     return setSubmissionError(true);
   };
-  const [updateRestaurant] = useMutation(UPDATE_RESTAURANT_MUTATION, {
-    ignoreResults: true,
-    onCompleted: () => handleCompleted(restaurantID),
-    onError: (err) => handleError(err),
-  });
-  const [problems, setProblems] = useState(potentialProblems);
+  const updateRestaurant = useUpdateRestaurant(handleCompleted, handleError);
+
   const handleChange = (idx, newBool) => {
     const newProblems = [...problems];
     newProblems[idx][1] = newBool;
@@ -64,14 +64,7 @@ export default function ReportProblems({
         }
         return obj;
       }, warningsWithoutType);
-      updateRestaurant({
-        variables: {
-          id: restaurantID,
-          data: {
-            warnings: { ...newWarnings },
-          },
-        },
-      });
+      updateRestaurant(restaurantID, { warnings: { ...newWarnings } });
     } else {
       setAlreadyReportedProblem(true);
     }
