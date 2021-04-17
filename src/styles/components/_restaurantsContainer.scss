@@ -18,6 +18,7 @@
   .restaurant {
     display: flex;
     margin: 1.5rem 0;
+    width: 70vw;
     height: 40rem;
     @include respond(tab-port) {
       flex-direction: column;

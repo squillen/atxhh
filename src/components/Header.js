@@ -20,7 +20,7 @@ export default function Header() {
               <h1 className='logo-main'>
                 <a href='/'>ATXHH</a>
               </h1>
-              {/* <h4 className="logo-sub">austin happy hour</h4> */}
+              <h4 className="logo-sub">austin, tx happy hours</h4>
             </li>
             {/* {id ? (
               <li
