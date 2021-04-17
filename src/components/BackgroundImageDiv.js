@@ -8,11 +8,12 @@ export default function BackgroundImageDiv({ images, styles }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const noOfImages = images && images.length;
   if (!noOfImages) return null;
-  const handleClick = () => (direction) => {
+  const handleClick = (direction) => () => {
     if (direction < 0) {
-      if (currentIndex === 0) setCurrentIndex(noOfImages);
-      else setCurrentIndex(currentIndex - 1);
-    } else if (currentIndex === noOfImages - 1) setCurrentIndex(0);
+      if (currentIndex === 0) {
+        setCurrentIndex(noOfImages - 1);
+      } else setCurrentIndex(currentIndex - 1);
+    } else if (currentIndex + 1 === noOfImages) setCurrentIndex(0);
     else setCurrentIndex(currentIndex + 1);
   };
   return (
