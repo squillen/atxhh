@@ -70,7 +70,7 @@ export default function UserSelections({
       const timeNow = `${hour}:${min}`;
       times = [timeNow, timeNow];
       newSelectedDays = selectedDays.map((tuple, idx) => {
-        if (idx + 1 === todaysDay) tuple[1] = true;
+        if (idx - 1 === todaysDay) tuple[1] = true;
         else tuple[1] = false;
         return tuple;
       });
