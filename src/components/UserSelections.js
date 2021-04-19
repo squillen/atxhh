@@ -141,7 +141,8 @@ export default function UserSelections({
   const updateUserSelectionTupleValue = (key, idx, value) => {
     const selection = userSelections[key] ?? [[]];
     const newArr = [...selection];
-    if (key === 'selectedDays' && newArr[idx] !== todaysDay + 1) setHappeningNow(false) 
+    if (key === 'selectedDays' && newArr[idx] !== todaysDay + 1)
+      setHappeningNow(false);
     const display = newArr[idx][0] || '';
     if (display.toString().toLowerCase() === 'all') {
       newArr.forEach((el) => {
@@ -157,19 +158,15 @@ export default function UserSelections({
   };
 
   return (
-    <div className='selections-container'>
-      <div
-        className={
-          atTop ? 'selections-container--white' : 'selections-container'
-        }
-      >
-        <Toggle
-          toggle={showSelections}
-          showLabel='Show filters'
-          hideLabel='Hide filters'
-          onClick={() => setShowSelections(!showSelections)}
-        />
-      </div>
+    <div
+      className={atTop ? 'selections-container--white' : 'selections-container'}
+    >
+      <Toggle
+        toggle={showSelections}
+        showLabel='Show filters'
+        hideLabel='Hide filters'
+        onClick={() => setShowSelections(!showSelections)}
+      />
       <div
         className={`user-selections__form ${
           showSelections ? 'selections--show' : 'selections--hide'

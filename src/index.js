@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import App from './App';
 import './styles/main.scss';
 
-// REALM
+const { REACT_APP_GA_TRACKING_ID } = process.env;
+ReactGA.initialize(REACT_APP_GA_TRACKING_ID);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
