@@ -41,7 +41,9 @@ export default function Home() {
           handleSearchUpdate={setUserSearchQuery}
           setShowSelections={setShowSelections}
         />
-        {restaurants ? (
+        {loading ? (
+          <Loading>updating restaurants...</Loading>
+        ) : restaurants?.length ? (
           <div
             className='restaurants-section'
             onClick={showSelections ? () => setShowSelections(false) : null}
@@ -49,11 +51,12 @@ export default function Home() {
             <MapWithRestaurant restaurantData={restaurants} />
             <RestaurantsContainer restaurantData={restaurants} />
           </div>
-        ) : (
+        ) : !restaurants?.length ? (
           <div className='no-restaurants'>
-            No restaurants match your filters.
+            Aw french fries! No restaurants match those filters. Try something
+            different.
           </div>
-        )}
+        ) : null}
       </div>
     </Layout>
   );

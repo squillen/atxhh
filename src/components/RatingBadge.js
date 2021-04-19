@@ -22,19 +22,17 @@ export default function RatingBadge({ name, rating }) {
   return (
     badgeLabel && (
       <>
-        <div className='rating-badge-container'>
+        <div
+          onClick={() => setShowRating(!showRating)}
+          className='rating-badge-container'
+        >
           <Badge label={badgeLabel} />
-          <div
-            onClick={() => setShowRating(!showRating)}
-            className='rating-text'
-          >
-            our rating
-          </div>
+          <div className='rating-text'>our rating</div>
         </div>
         <Modal display={showRating} handleClose={() => setShowRating(false)}>
           <div className='rating-explanation-container'>
             <div className='rating-explanation-header-container'>
-              <h2 className='rating-explanation-header'>Rating for {name}</h2>
+              <h2 className='rating-explanation-header'>Our rating for the {name} happy hour:</h2>
               <Badge label={badgeLabel} />
             </div>
             <div>

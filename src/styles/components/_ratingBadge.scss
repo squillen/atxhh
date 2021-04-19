@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 .rating-text {
-  cursor: pointer;
   text-align: center;
 }
 
@@ -18,15 +18,14 @@
   justify-content: space-around;
 
   .rating-explanation-header-container {
-    width: 100%;
+    width: 80%;
     height: 40%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-  }
-
-  .rating-explanation-header {
     text-align: center;
+
   }
 }
