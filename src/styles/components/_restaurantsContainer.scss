@@ -20,11 +20,11 @@
     display: flex;
     margin: 1.5rem 0;
     height: 45rem;
+    width: 80vw;
     @include respond(tab-port) {
       flex-direction: column;
       margin: 2rem auto;
       height: auto;
-      width: 80vw;
     }
   }
 }
