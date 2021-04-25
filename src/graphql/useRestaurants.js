@@ -26,6 +26,7 @@ function findRestaurants(query) {
           }
           cuisine
           description
+          startTime
           endTime
           happyHourDays
           images {
@@ -38,7 +39,6 @@ function findRestaurants(query) {
           percentOffFood
           price
           rating
-          startTime
           url
           warnings {
             WRONG_TIMES
@@ -53,7 +53,7 @@ function findRestaurants(query) {
     { variables: { query } },
   );
   if (error) {
-    console.error(`Failed to fetch restaurants: ${error.message}`);
+    throw new Error(`Failed to fetch restaurants: ${error.message}`);
   }
   const restaurants = data?.restaurants ?? [];
   return { restaurants, loading, error, refetch };

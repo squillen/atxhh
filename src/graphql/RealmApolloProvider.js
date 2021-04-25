@@ -14,10 +14,19 @@ const createRealmApolloClient = (app) => {
     uri: `https://us-east-1.aws.realm.mongodb.com/api/client/v2.0/app/${app.id}/graphql`,
     fetch: async (uri, options) => {
       if (!app.currentUser) {
-        await app.logIn(Realm.Credentials.anonymous());
+        try {
+          await app.logIn(Realm.Credentials.anonymous());
+        } catch (e) {
+          console.error('REALM CONNECTION ERROR ::: ', e);
+          throw new Error(`REALM CONNECTION ERROR ::: ${e}`);
+        }
       }
-      await app.currentUser.refreshCustomData();
-      options.headers.Authorization = `Bearer ${app.currentUser._accessToken}`;
+      try {
+        await app.currentUser.refreshCustomData();
+        options.headers.Authorization = `Bearer ${app.currentUser._accessToken}`;
+      } catch (e) {
+        console.error('Refresh custom data error ::: ', e);
+      }
       return fetch(uri, options);
     },
   });

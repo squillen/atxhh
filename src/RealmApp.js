@@ -31,8 +31,12 @@ export const RealmAppProvider = ({ appId, children }) => {
   }
 
   async function logOut() {
-    await app?.currentUser?.logOut();
-    setCurrentUser(app.currentUser);
+    try {
+      await app.currentUser.logOut();
+      setCurrentUser(app.currentUser);
+    } catch (e) {
+      console.error('Unable to log out of Realm ::', e);
+    }
   }
 
   const wrapped = { ...app, currentUser, logIn, logOut };
